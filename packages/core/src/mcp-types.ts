@@ -12,7 +12,7 @@ export interface IAgentVaultContext {
 
 export type AgentStatus = "planning" | "executing" | "waiting" | "finished" | "error";
 
-export type ToolCommandName = 'GetVaultContext' | 'ExecuteShell' | 'CreateNote' | 'UpdateNote' | 'ReportStatus' | 'CreateAgentVault' | 'SetVaultContext' | 'EnrichContext' | 'CommitState' | 'GetAllNodes' | 'ProcessFile' | 'PublishNode' | 'GetHistoryProof';
+export type ToolCommandName = 'GetVaultContext' | 'ExecuteShell' | 'CreateNote' | 'UpdateNote' | 'ReportStatus' | 'CreateAgentVault' | 'SetVaultContext' | 'EnrichContext' | 'CommitState' | 'GetAllNodes' | 'ProcessFile' | 'PublishNode' | 'GetHistoryProof' | 'WikifyAndTag';
 
 /**
  * IToolCommand: The structured object an Agent sends to request tool execution.

@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@opencode-v5/core": "workspace:*",
-    "chokidar": "^3.5.3",
-    "ws": "^8.13.0",
-    "ethers": "^5.7.2"
+    "wordnet": "^5.0.0",
+    "wink-nlp": "^2.0.0",
+    "wink-eng-lite-web-model": "^2.0.0",
   },
   "devDependencies": {
     "@types/node": "^16.11.6",

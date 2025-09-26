@@ -94,4 +94,17 @@ export class OpencodeAgentClient {
             this.sendCommand(command);
         });
     }
+
+    wikifyAndTag(filePath: string): Promise<any> {
+        return new Promise((resolve) => {
+            const command: IToolCommand = {
+                id: uuidv4(),
+                commandName: 'WikifyAndTag',
+                arguments: { filePath },
+                timestamp: Date.now(),
+            };
+            this.pendingRequests.set(command.id, resolve);
+            this.sendCommand(command);
+        });
+    }
 }

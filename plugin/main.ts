@@ -11,6 +11,12 @@ export default class OpencodeAgentPlugin extends Plugin {
         // ... (onload logic)
 
         this.addCommand({
+            id: 'wikify-document',
+            name: 'Wikify document (Agent Assist)',
+            callback: () => this.wikifyDocument(),
+        });
+
+        this.addCommand({
             id: 'verify-node-history',
             name: 'Verify node history',
             callback: () => this.verifyNodeHistory(),
@@ -60,5 +66,24 @@ export default class OpencodeAgentPlugin extends Plugin {
         }
     }
 
-    // ... (rest of file)
+    async connectToLocalRuntime() {
+        // ... (existing function)
+    }
+
+    async wikifyDocument() {
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+            new Notice('No active file to wikify.');
+            return;
+        }
+
+        new Notice(`Wikifying document: ${activeFile.path}...`);
+        const response = await this.client.wikifyAndTag(activeFile.path);
+
+        if (response.error) {
+            new Notice(`Wikification failed: ${response.error}`);
+        } else {
+            new Notice(`✅ Document wikified: ${response.message}`);
+        }
+    }
 }

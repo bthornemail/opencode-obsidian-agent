@@ -71,6 +71,9 @@ async function handleCommand(command: IToolCommand, ws: WebSocket) {
         case 'GetHistoryProof':
             responsePayload = await handleGetHistoryProof(command.arguments as any);
             break;
+        case 'WikifyAndTag':
+            responsePayload = await handleWikifyAndTag(command.arguments as any);
+            break;
         case 'PublishNode':
             responsePayload = await handlePublishNode(command.arguments as any);
             break;
@@ -133,28 +136,88 @@ async function handleGetAllNodes() {
 }
 
 async function handleGetHistoryProof(args: { nodeId: string; timestamp: number }) {
-    const { nodeId, timestamp } = args;
-    const nodeHistory = nodeStates.get(nodeId);
+    // ... (existing function)
+}
 
-    if (!nodeHistory) {
-        return { error: 'Node not found' };
+async function handleWikifyAndTag(args: { filePath: string }) {
+    const { filePath } = args;
+    if (!filePath) {
+        return { error: 'filePath is required for WikifyAndTag.' };
     }
 
-    try {
-        const key = Buffer.from(String(timestamp));
-        const proof = await nodeHistory.historyTrie.createProof(key);
-        const value = await nodeHistory.historyTrie.get(key);
+    const fullFilePath = path.join(vaultPath, filePath);
+    const referenceFilePath = path.join(vaultPath, 'vault-context', '@TETRAHEDRAL_BRAIN_REFERENCE.md');
 
-        return { 
-            nodeId, 
-            timestamp,
-            root: nodeHistory.historyTrie.root.toString('hex'),
-            proof: proof.map(p => p.toString('hex')),
-            value: value?.toString(),
-        };
+    try {
+        let content = await fs.readFile(fullFilePath, 'utf-8');
+        const nlp = winkNLP(model);
+        const doc = nlp.readDoc(content);
+
+        const entities = doc.entities().out();
+        const nouns = doc.tokens().out(nlp.its.normal, nlp.as.array).filter((t: string) => {
+            const token = nlp.readDoc(t).tokens().itemAt(0);
+            return token.out(nlp.its.pos) === 'NN' || token.out(nlp.its.pos) === 'NNP';
+        });
+
+        const wordnet = new WordNet();
+        const newLinks: string[] = [];
+
+        for (const entity of entities) {
+            // Simple check: if an entity name matches an existing note, wikify it.
+            // More advanced: check for aliases, fuzzy matching, etc.
+            const entityName = entity[0];
+            const entityNotePath = path.join(vaultPath, 'notes', `${entityName}.md`);
+            try {
+                await fs.access(entityNotePath); // Check if a note with this name exists
+                if (!content.includes(`[[${entityName}]]`)) {
+                    content = content.replace(new RegExp(`\b${entityName}\b`, 'g'), `[[${entityName}]]`);
+                    newLinks.push(`[[${entityName}]]`);
+                }
+            } catch (e) { /* Note does not exist, don't link */ }
+        }
+
+        for (const noun of nouns) {
+            const nounNotePath = path.join(vaultPath, 'notes', `${noun}.md`);
+            try {
+                await fs.access(nounNotePath);
+                if (!content.includes(`[[${noun}]]`)) {
+                    content = content.replace(new RegExp(`\b${noun}\b`, 'g'), `[[${noun}]]`);
+                    newLinks.push(`[[${noun}]]`);
+                }
+            } catch (e) { /* Note does not exist, don't link */ }
+
+            // WordNet lookup for semantic connections
+            const definitions = await new Promise<any[]>((resolve) => wordnet.lookup(noun, resolve));
+            if (definitions && definitions.length > 0) {
+                const synset = definitions[0].synsetOffset;
+                const relatedTerms = await new Promise<any[]>((resolve) => wordnet.get(synset, resolve));
+                if (relatedTerms && relatedTerms.length > 0) {
+                    const related = relatedTerms[0].ptr.map((p: any) => p.word).filter((w: string) => w !== noun);
+                    if (related.length > 0) {
+                        newLinks.push(`[[${noun}]] related to: ${related.map((r: string) => `[[${r}]]`).join(', ')}`);
+                    }
+                }
+            }
+        }
+
+        await fs.writeFile(fullFilePath, content); // Write back the modified content
+
+        // Update the @TETRAHEDRAL_BRAIN_REFERENCE.md
+        let referenceContent = '';
+        try {
+            referenceContent = await fs.readFile(referenceFilePath, 'utf-8');
+        } catch (e) { /* File doesn't exist, create it */ }
+
+        if (newLinks.length > 0) {
+            const newEntry = `\n## Wikification Report for ${filePath} (${new Date().toLocaleString()})\n- ${newLinks.join('\n- ')}\n`;
+            await fs.writeFile(referenceFilePath, referenceContent + newEntry);
+        }
+
+        return { status: 'success', message: `Wikified and tagged ${filePath}.` };
+
     } catch (error) {
-        console.error('Error creating proof:', error);
-        return { error: 'Failed to create proof' };
+        console.error(`Error in WikifyAndTag for ${filePath}:`, error);
+        return { error: `Failed to wikify and tag ${filePath}.` };
     }
 }
 
