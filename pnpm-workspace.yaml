@@ -1,3 +1,6 @@
 packages:
-  - 'opencode-plugin'
-  - 'opencode-cli'
+  - 'cli'
+  - 'server'
+  - 'agent-runtime'
+  - 'plugin'
+  - 'packages/*'

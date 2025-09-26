@@ -1,73 +1,64 @@
-# Opencode Obsidian Agent Environment
+# Opencode Obsidian Agentic Vaults
 
-This project integrates the OpenCode.ai SDK with an Obsidian plugin to enable collaborative agent pipelines.
+**Version:** 6.0 | **Status:** MVP Complete
 
-## Features
+This repository contains the implementation of the **Tetrahedral Shared Brain**, a production-grade environment for decentralized, collaborative coding and AI agents using Opencode and Obsidian.
 
-- **Opencode Server**: A WebSocket server that manages peer connections, messaging, and a shared graph state using a Patricia Trie.
-- **Opencode Client**: A type-safe TypeScript wrapper for interacting with the server.
-- **Obsidian Plugin**: Integrates with your Obsidian vault, mapping notes and canvases to a collaborative graph.
+See `TETRAHEDRAL_BRAIN_PLAN.md` for the full architectural specification.
 
-## Setup and Installation
+---
 
-1.  **Install Dependencies**:
+## Architecture Overview
 
+This project uses a `pnpm` workspace (monorepo) to manage several distinct packages:
+
+-   `cli`: A command-line tool (`opencode-vault`) for creating, starting, and managing agent vaults.
+-   `agent-runtime`: A background Node.js process that runs on a per-vault basis. It handles file watching, `TetraNode` computation, and hosts a local RPC server for the plugin.
+-   `plugin`: The Obsidian plugin that acts as the UI and controller, connecting to the local `agent-runtime` for its vault.
+-   `server`: A shared Opencode server wrapper (for future use).
+-   `packages/core`: A shared library containing the core logic (`TetraNode`, types, etc.) used by all other packages.
+
+## Setup
+
+1.  **Install Dependencies**: This project uses `pnpm` as its package manager.
     ```bash
-    npm install
+    pnpm install
     ```
 
-2.  **Build the Project**:
-
+2.  **Build the Project**: Build all the packages in the workspace.
     ```bash
-    npm run build
+    pnpm run build
     ```
 
-3.  **Link the Plugin in Obsidian**:
+## Getting Started: Workflow
 
-    - Open Obsidian's settings.
-    - Go to `Community plugins`.
-    - Make sure `Restricted mode` is off.
-    - Click on `Browse` and search for `Opencode Agent`.
-    - If it's not listed, you will need to manually install it:
-        - Copy the `.obsidian/plugins/opencode-agent-plugin` directory into your vault's `.obsidian/plugins/` directory.
-        - Reload Obsidian.
-    - Enable the `Opencode Agent` plugin.
+Here is the standard workflow to create and run a new agent vault:
 
-4.  **Configure the Plugin**:
+1.  **Create a Vault**: Use the new CLI to scaffold a new agent vault.
+    ```bash
+    ./cli/dist/index.js create my-first-agent
+    ```
+    This will create a new vault at `vaults/agents/my-first-agent`.
 
-    - Go to the `Opencode Agent` settings in Obsidian.
-    - Set your `Wallet Address`, `Peer ID`, and the `Server URL` (default is `ws://localhost:8080`).
+2.  **Start the Agent Runtime**: Launch the dedicated background process for your new vault.
+    ```bash
+    ./cli/dist/index.js start my-first-agent
+    ```
+    You can view the runtime's logs at `vaults/agents/my-first-agent/.agent.log`.
 
-## How to Run
+3.  **Open the Vault in Obsidian**: 
+    -   Open Obsidian.
+    -   Use the "Open another vault" command.
+    -   Select "Open folder as vault" and choose the `vaults/agents/my-first-agent` directory.
 
-### Development Mode
+4.  **Enable the Plugin**: 
+    -   Go to `Settings` > `Community plugins`.
+    -   Ensure "Restricted mode" is off.
+    -   The `opencode-agent-plugin` should be present (as it was part of the template). Enable it.
+    -   The plugin will automatically connect to the local `agent-runtime`.
 
-This command will start the server and the Obsidian plugin in watch mode.
-
-```bash
-npm run dev
-```
-
-### Production
-
-First, build the project:
-
-```bash
-npm run build
-```
-
-Then, start the server:
-
-```bash
-node dist/server/index.js
-```
-
-The Obsidian plugin will be built into its directory and should be enabled in Obsidian.
-
-## Usage
-
-Once the plugin is configured and connected, you can use the following commands from the Obsidian command palette:
-
--   **Connect to Shared Brain**: Manually connect to the Opencode server.
--   **Publish Node Update**: Publish the content of the currently active note to the shared graph.
--   **Visualize Graph in Canvas**: Create a new canvas in Obsidian with a visualization of the shared graph state.
+5.  **Test the System**: 
+    -   Create a new folder inside your new vault called `notes`.
+    -   Create a new note inside the `notes` folder (e.g., `test-node.md`).
+    -   Add content to the note formatted with the four vertices (e.g., `# V1`, `# V2`, etc.).
+    -   Save the file. Observe the `agent-runtime` log file (`/.agent.log`) - it will automatically process the file and create a new `TetraNode` JSON representation in the `nodes/` directory.

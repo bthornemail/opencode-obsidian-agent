@@ -55,74 +55,18 @@ How do we ensure that a network of these nodes remains consistent? We use **Geom
 
 ---
 
-## 3. System Architecture
+## 3. V5+ System Architecture
 
-### 3.1. Identity: Who is Who?
+The definitive architecture for the project is detailed in the **`TETRAHEDRAL_BRAIN_PLAN.md`** document. This specification supersedes the architectural summaries in this reference.
 
--   **Node Identity**: Each node gets a unique, permanent address from its Static Centroid, using the same technology that powers cryptocurrencies (Hierarchical Deterministic Wallets). This allows a node to own its data and sign its updates.
--   **Peer Identity**: A user or an AI agent on the network is a "peer." They have their own ID, which can be a `peerId` or a shared passkey for private groups.
+At a high level, the architecture consists of three primary components:
 
-### 3.2. Subgraphs: Shared Workspaces
-
-Nodes are organized into **Subgraphs**, which are like shared, secure project folders.
--   A Subgraph contains a group of related nodes and defines the "rules of the game" for that group:
-    -   **Access Policy**: Is it a public project, a private one for a small team, or something in between?
-    -   **Protocol Schema**: What are the specific rules for validation and consensus within this group?
-
-### 3.3. Communication: The Network Layer
-
--   **Connections as Edges**: The lines connecting nodes in our graph are live, real-time communication channels.
--   **Protocol (QUIC)**: We use a modern, fast, and secure protocol called QUIC for peer-to-peer communication.
--   **Pub/Sub Model**: For efficiency, nodes subscribe to topics they care about. When a node is updated, it publishes a small, lightweight message only to the peers who are listening.
+1.  **`opencode-vault` CLI**: A command-line interface for creating, managing, and building isolated agent/user vaults.
+2.  **`agent-runtime`**: A background Node.js process that runs on a per-vault basis. It is responsible for all heavy lifting: watching the vault for changes, computing node hashes, managing the local database, and exposing an RPC endpoint.
+3.  **Obsidian Plugin**: A lightweight plugin that runs inside each Obsidian vault. It serves as the user interface, connecting to the local `agent-runtime` for all data and operations.
 
 ---
 
-## 4. Integration: Obsidian & Opencode
+## 4. Implementation Plan
 
-### 4.1. Obsidian: The User's Gateway
-
-Obsidian is where the user interacts with the Shared Brain. It's the bridge between human thought and the verifiable graph.
-
--   **Notes as Nodes**: A simple note in your Obsidian vault becomes a powerful Tetrahedral Node.
--   **Automatic Hashing**: When you edit a note (e.g., change a code block), the plugin automatically re-calculates the hashes and centroids in the background.
--   **Metadata as Truth**: This cryptographic truth (the centroids) is stored in the note's frontmatter metadata.
--   **Canvas as a Visualizer**: The Obsidian Canvas is used to create a live, interactive map of the Shared Brain, showing the nodes, their connections, and their current state.
-
-**Example Workflow:**
-1.  You create a new note in Obsidian and add a code block.
-2.  The plugin identifies this as **Vertex 1** of a new node.
-3.  It computes the `staticCentroid` and saves it to the note's frontmatter.
-4.  You run a command: "Execute Node."
-5.  The plugin runs the code, gets an output, and computes the `dynamicCentroid`.
-6.  It then broadcasts this update to connected peers.
-
-### 4.2. Opencode: The Agentic Backbone
-
-Opencode provides the tools to build and manage the AI agents and server infrastructure that power the network.
--   **Agentic Interaction**: Opencode allows us to create AI agents that can read, write, and interact with the Tetrahedral Nodes, just like a human user.
--   **Server Infrastructure**: The peer-to-peer server that manages connections and messages is built using Opencode's environment.
-
----
-
-## 5. Glossary of Terms
-
--   **Tetrahedral Node**: The core data unit; a self-verifying container for a pure function.
--   **Vertex**: One of the four components that define a node (Logic, Signature, Interface, State).
--   **Static Centroid**: The node's unique, unchanging cryptographic DNA.
--   **Dynamic Centroid**: The node's live "heartbeat," which changes with every new output.
--   **Face**: A side of the tetrahedron; used to store a historical log of the node's activity.
--   **Patricia Trie**: A special data structure used to store history in a verifiable way.
--   **Subgraph**: A shared workspace or project folder for a group of nodes.
--   **QUIC**: A modern, fast, and secure network protocol used for peer-to-peer communication.
-
----
-
-## 6. Phased Implementation Plan
-
-This project will be built in phases to ensure a stable and robust foundation.
-
-1.  **Phase 0 (Core Logic)**: Implement the `TetraNode` class in TypeScript. Build a simple command-line tool to create a node and verify its centroids.
-2.  **Phase 1 (Obsidian Integration)**: Develop the core Obsidian plugin. Have it automatically track changes in notes and update centroids in the frontmatter. Render a basic visualization on the Canvas.
-3.  **Phase 2 (Networking & Identity)**: Integrate `ethers.js` for unique node addresses and digital signatures. Implement the peer-to-peer communication layer so two users can exchange node updates.
-4.  **Phase 3 (History & Sync)**: **[COMPLETED]** The system's verifiable history is now functional. The server-side state management was upgraded to use `merkle-patricia-tree`, where each node is assigned a dedicated historical Patricia Trie. A timestamp-based "last-write-wins" conflict resolution policy has been implemented. An end-to-end workflow for generating Merkle inclusion proofs on the server and verifying them on the client is now in place, enabling trustless verification of a node's history.
-5.  **Phase 4 (Agentic Automation)**: Onboard Opencode AI agents to the network, allowing them to autonomously create, update, and verify nodes, turning the Shared Brain into a true collaborative intelligence.
+All development will follow the prioritized roadmap outlined in the **`TETRAHEDRAL_BRAIN_PLAN.md`** document. Please refer to that file for detailed milestones and implementation phases.

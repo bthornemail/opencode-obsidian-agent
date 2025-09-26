@@ -1,52 +1,37 @@
-# Project Directive: V5 Agentic Core Refactor
+# Project Directive: V6 - Phase 2 Implementation
 
-**Version:** 5.0
-**Status:** Ready for Development (Milestone 1)
+**Version:** 6.0
+**Status:** MVP Complete. Ready for Development (Phase 2).
 
 ---
 
 ## 1. High-Level Objective
 
-The project's objective has evolved. The new primary task is to refactor the existing proof-of-concept into a production-grade, decentralized, and autonomous coding environment based on the **Opencode V5 Master Specification**.
+The foundational MVP of the "Agentic Vaults" architecture is complete. The immediate task is to begin **Phase 2** of the new master plan.
 
-This involves a significant architectural shift to a dual-application model, introducing isolated agent environments, and standardizing all communication via the Model Context Protocol (MCP).
+## 2. Primary Reference
 
-## 2. Primary References
+All work must adhere to the new, comprehensive specification document:
 
-All development must adhere to the architecture detailed in the following documents:
+-   **`TETRAHEDRAL_BRAIN_PLAN.md`**
 
-1.  **Master Specification**: The complete architectural blueprint is defined in the files located at `plan/opencode-master-specification/`.
-2.  **Core Concepts**: The fundamental principles of the Tetrahedral Node are documented in `TETRAHEDRAL_BRAIN_REFERENCE.md`.
+## 3. Immediate Task: MCP Integration
 
-## 3. Implementation Plan Summary
+As outlined in the plan, Phase 2 involves three key areas. The most critical and foundational of these is **Basic MCP Integration for context exchange**.
 
-The refactoring will proceed through the following major milestones:
+Your task is to refactor the simple, ad-hoc RPC communication currently used between the `plugin` and the `agent-runtime` to strictly adhere to the **Model Context Protocol (MCP)** `IToolCommand` interfaces defined in the `@opencode-v5/core` package.
 
-*   **Milestone 1: Establish the Dual-Application Infrastructure**
-    *   Restructure the project to support `opencode-cli` (backend) and `opencode-plugin` (frontend) in a `pnpm` workspace. Establish the new `vaults/` directory.
+**Implementation Steps:**
 
-*   **Milestone 2: Implement the Model Context Protocol (MCP)**
-    *   Integrate the official MCP TypeScript SDK and refactor all network communication to use its standardized interfaces (`IToolCommand`, `IAgentVaultContext`).
+1.  Refactor the `agent-runtime`'s WebSocket server to be a pure MCP command processor. It should expect all incoming messages to be valid `IToolCommand` objects.
+2.  Refactor the `plugin`'s `client.ts` to construct and send proper `IToolCommand` objects for all actions (e.g., `ProcessFile`).
+3.  Update the `GetAllNodes` command (which we have not yet implemented) to be an MCP command.
+4.  Update the React UI to use this new MCP command to fetch and display the list of nodes from the runtime.
 
-*   **Milestone 3: Implement Agent Lifecycle and Tooling**
-    *   Build the logic for bootstrapping new agent vaults and securely executing sandboxed shell commands (like `pnpm install` and `docker run`).
+## 4. Agent Instructions
 
-*   **Milestone 4: Integrate Advanced Capabilities (NLP & DOICL)**
-    *   Add the specified NLP libraries for context enrichment and implement the immutable history layer (DOICL) by generating and logging CIDs for completed work.
+1.  Your primary goal is to remove all non-MCP communication between the plugin and the runtime.
+2.  Start by implementing the `GetAllNodes` command, as this will provide the data needed for the UI update.
+3.  Then, refactor the existing `ProcessFile` trigger to also use the MCP command structure.
 
-## 4. Immediate Task
-
-The immediate task is to begin **Milestone 1, Task 1.1: Project Restructuring**.
-
-This involves:
-1.  Creating the new directories: `vaults/agents/`, `vaults/templates/base-agent-vault/`, and `opencode-cli/`.
-2.  Moving the existing plugin source code into a new root-level `opencode-plugin/` directory.
-3.  Reconfiguring the root `package.json` to define a `pnpm` workspace.
-
-## 5. Agent Instructions
-
-1.  **Adhere to the Master Specification**: All implementation details must follow the architecture described in the `plan/opencode-master-specification/` documents.
-2.  **Follow the Milestones Sequentially**: Do not skip ahead. The successful completion of each milestone is foundational for the next.
-3.  **Begin with Restructuring**: Your first action is to execute the file and directory changes outlined in Task 1.1.
-
-You are now cleared to begin the V5 refactoring.
+You are now cleared to begin Phase 2.

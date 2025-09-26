@@ -47,16 +47,5 @@ export class OpencodeAgentSettingTab extends PluginSettingTab {
                     this.plugin.settings.peerId = value;
                     await this.plugin.saveSettings();
                 }));
-
-        new Setting(containerEl)
-            .setName('Server URL')
-            .setDesc('The URL of the Opencode Agent server.')
-            .addText(text => text
-                .setPlaceholder('Enter the server URL')
-                .setValue(this.plugin.settings.serverUrl)
-                .onChange(async (value) => {
-                    this.plugin.settings.serverUrl = value;
-                    await this.plugin.saveSettings();
-                }));
     }
 }
