@@ -1,4 +1,4 @@
-import { Trie } from 'merkle-patricia-tree';
+import { BaseTrie as Trie } from 'merkle-patricia-tree';
 
 /**
  * Verifies a Merkle proof against a given root hash.
@@ -14,7 +14,7 @@ export async function verifyProof(root: string, key: string, proof: string[]): P
         const proofBuffers = proof.map(p => Buffer.from(p, 'hex'));
 
         const value = await Trie.verifyProof(rootBuffer, keyBuffer, proofBuffers);
-        return value.toString();
+        return value ? value.toString() : null;
     } catch (error) {
         console.error("Proof verification failed:", error);
         return null;

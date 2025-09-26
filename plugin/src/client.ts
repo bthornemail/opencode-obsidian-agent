@@ -20,13 +20,13 @@ export class OpencodeAgentClient {
                 resolve();
             });
 
-            this.ws.on('error', (error) => {
+            this.ws.on('error', (error: Event) => {
                 console.error('[Client] WebSocket error:', error);
                 reject(error);
             });
 
-            this.ws.on('message', (message) => {
-                const parsedMessage = JSON.parse(message.toString());
+            this.ws.on('message', (message: MessageEvent) => {
+                const parsedMessage = JSON.parse(message.data.toString());
 
                 // Check if this is a response to a pending request
                 if (parsedMessage.type === 'MCP_RESPONSE' && this.pendingRequests.has(parsedMessage.requestId)) {

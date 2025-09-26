@@ -1,22 +1,20 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import MyPlugin from '../main';
+import OpencodeAgentPlugin from '../main'; // Correct import path
 
 export interface OpencodeAgentSettings {
     walletAddress: string;
     peerId: string;
-    serverUrl: string;
 }
 
 export const DEFAULT_SETTINGS: OpencodeAgentSettings = {
     walletAddress: '',
     peerId: `peer-${Date.now()}`,
-    serverUrl: 'ws://localhost:8080'
 };
 
 export class OpencodeAgentSettingTab extends PluginSettingTab {
-    plugin: MyPlugin;
+    plugin: OpencodeAgentPlugin; // Correct type
 
-    constructor(app: App, plugin: MyPlugin) {
+    constructor(app: App, plugin: OpencodeAgentPlugin) {
         super(app, plugin);
         this.plugin = plugin;
     }

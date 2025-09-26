@@ -1,6 +1,9 @@
 packages:
-  - 'cli'
-  - 'server'
-  - 'agent-runtime'
-  - 'plugin'
-  - 'packages/*'
+  - cli
+  - server
+  - agent-runtime
+  - plugin
+  - packages/*
+
+ignoredBuiltDependencies:
+  - '@ipshipyard/node-datachannel'
