@@ -62,8 +62,8 @@ The definitive architecture for the project is detailed in the **`TETRAHEDRAL_BR
 At a high level, the architecture consists of three primary components:
 
 1.  **`opencode-vault` CLI**: A command-line interface for creating, managing, and building isolated agent/user vaults.
-2.  **`agent-runtime`**: A background Node.js process that runs on a per-vault basis. It is responsible for all heavy lifting: watching the vault for changes, computing node hashes, managing the local database, and exposing an RPC endpoint.
-3.  **Obsidian Plugin**: A lightweight plugin that runs inside each Obsidian vault. It serves as the user interface, connecting to the local `agent-runtime` for all data and operations.
+2.  **`runtime`**: A background Node.js process that runs on a per-vault basis. It is responsible for all heavy lifting: watching the vault for changes, computing node hashes, managing the local database, and exposing an RPC endpoint.
+3.  **Obsidian Plugin**: A lightweight plugin that runs inside each Obsidian vault. It serves as the user interface, connecting to the local `runtime` for all data and operations.
 
 ---
 

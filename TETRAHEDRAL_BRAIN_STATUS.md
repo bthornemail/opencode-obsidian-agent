@@ -13,10 +13,10 @@ The initial proof-of-concept has been successfully refactored into the new, robu
 
 ## 2. Completed Milestone: MVP
 
--   **Architectural Refactor**: The project is now a `pnpm` workspace monorepo with a clean separation of concerns between the `cli`, `server`, `agent-runtime`, `plugin`, and a shared `core` package.
+-   **Architectural Refactor**: The project is now a `pnpm` workspace monorepo with a clean separation of concerns between the `cli`, `server`, `runtime`, `plugin`, and a shared `core` package.
 -   **`opencode-vault` CLI**: A functional CLI now exists with `create` and `start` commands to manage the lifecycle of isolated agent vaults.
--   **`agent-runtime`**: Each vault has a dedicated background runtime that automatically processes notes into `TetraNodes` by watching the file system.
--   **Plugin as a Client**: The Obsidian plugin has been refactored to be a pure client, connecting to its local `agent-runtime` based on a per-vault configuration.
+-   **`runtime`**: Each vault has a dedicated background runtime that automatically processes notes into `TetraNodes` by watching the file system.
+-   **Plugin as a Client**: The Obsidian plugin has been refactored to be a pure client, connecting to its local `runtime` based on a per-vault configuration.
 -   **Two-Way Sync**: A robust, event-driven sync system is in place. The plugin uses native Obsidian events for user changes, and the runtime uses a file watcher for external changes, ensuring all modifications are captured.
 
 ## 3. Next Steps

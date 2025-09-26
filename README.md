@@ -13,8 +13,8 @@ See `TETRAHEDRAL_BRAIN_PLAN.md` for the full architectural specification.
 This project uses a `pnpm` workspace (monorepo) to manage several distinct packages:
 
 -   `cli`: A command-line tool (`opencode-vault`) for creating, starting, and managing agent vaults.
--   `agent-runtime`: A background Node.js process that runs on a per-vault basis. It handles file watching, `TetraNode` computation, and hosts a local RPC server for the plugin.
--   `plugin`: The Obsidian plugin that acts as the UI and controller, connecting to the local `agent-runtime` for its vault.
+-   `runtime`: A background Node.js process that runs on a per-vault basis. It handles file watching, `TetraNode` computation, and hosts a local RPC server for the plugin.
+-   `plugin`: The Obsidian plugin that acts as the UI and controller, connecting to the local `runtime` for its vault.
 -   `server`: A shared Opencode server wrapper (for future use).
 -   `packages/core`: A shared library containing the core logic (`TetraNode`, types, etc.) used by all other packages.
 
@@ -55,10 +55,10 @@ Here is the standard workflow to create and run a new agent vault:
     -   Go to `Settings` > `Community plugins`.
     -   Ensure "Restricted mode" is off.
     -   The `opencode-agent-plugin` should be present (as it was part of the template). Enable it.
-    -   The plugin will automatically connect to the local `agent-runtime`.
+    -   The plugin will automatically connect to the local `runtime`.
 
 5.  **Test the System**: 
     -   Create a new folder inside your new vault called `notes`.
     -   Create a new note inside the `notes` folder (e.g., `test-node.md`).
     -   Add content to the note formatted with the four vertices (e.g., `# V1`, `# V2`, etc.).
-    -   Save the file. Observe the `agent-runtime` log file (`/.agent.log`) - it will automatically process the file and create a new `TetraNode` JSON representation in the `nodes/` directory.
+    -   Save the file. Observe the `runtime` log file (`/.agent.log`) - it will automatically process the file and create a new `TetraNode` JSON representation in the `nodes/` directory.

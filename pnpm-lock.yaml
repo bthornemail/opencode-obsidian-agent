@@ -55,7 +55,7 @@ importers:
         specifier: ^5.5.3
         version: 5.9.2
 
-  packages/agent-runtime:
+  packages/runtime:
     dependencies:
       '@opencode-obsidian-workspace/core':
         specifier: workspace:*

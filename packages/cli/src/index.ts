@@ -19,7 +19,7 @@ program
     .command('build <vault-name>')
     .description('Build a Docker image for the specified agent vault runtime')
     .action(async (vaultName) => {
-        const imageName = `agent-runtime-${vaultName.toLowerCase()}`;
+        const imageName = `runtime-${vaultName.toLowerCase()}`;
         console.log(`Building Docker image: ${imageName}...`);
 
         const buildProcess = spawn('docker', [
@@ -27,7 +27,7 @@ program
             '-t',
             imageName,
             '-f',
-            'agent-runtime/Dockerfile',
+            'runtime/Dockerfile',
             '.' // Build context is the root of the monorepo
         ], {
             stdio: 'inherit', // Stream the build output to the user's console
@@ -61,7 +61,7 @@ program
 
         if (options.docker) {
             // --- Docker Execution ---
-            const imageName = `agent-runtime-${vaultName.toLowerCase()}`;
+            const imageName = `runtime-${vaultName.toLowerCase()}`;
             console.log(`Starting agent runtime for vault "${vaultName}" using Docker image: ${imageName}...`);
 
             const runProcess = spawn('docker', [
@@ -91,7 +91,7 @@ program
             const runtimeProcess = spawn(
                 'ts-node',
                 [
-                    path.join(process.cwd(), 'agent-runtime', 'src', 'index.ts'),
+                    path.join(process.cwd(), 'runtime', 'src', 'index.ts'),
                     `--vaultPath=${vaultPath}`,
                     `--port=${options.port}`
                 ],

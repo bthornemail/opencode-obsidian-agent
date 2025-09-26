@@ -11,9 +11,9 @@ services:
     networks:
       - opencode-network
 
-  agent-runtime-my-test-vault:
+  runtime-my-test-vault:
     build:
-      context: ./agent-runtime
+      context: ./runtime
       dockerfile: Dockerfile
     ports:
       - "4201:4201"
@@ -28,10 +28,10 @@ services:
     networks:
       - opencode-network
 
-  # You can add more agent-runtime services for other vaults here
-  # agent-runtime-another-vault:
+  # You can add more runtime services for other vaults here
+  # runtime-another-vault:
   #   build:
-  #     context: ./agent-runtime
+  #     context: ./runtime
   #     dockerfile: Dockerfile
   #   ports:
   #     - "4202:4201" # Map host port 4202 to container port 4201

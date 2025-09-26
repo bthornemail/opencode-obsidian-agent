@@ -18,7 +18,7 @@ Test Plan: Opencode V5+ Core Functionality
    1     pnpm install
    2. Build All Packages:
    1     pnpm build
-      This will compile the cli, server, agent-runtime, plugin, and packages/core.
+      This will compile the cli, server, runtime, plugin, and packages/core.
 
   ---
 
@@ -68,7 +68,7 @@ Test Plan: Opencode V5+ Core Functionality
        * Go to Settings -> Community plugins.
        * Ensure "Restricted mode" is off.
        * The opencode-agent-plugin should be listed. Enable it.
-       * You should see a Notice in Obsidian: "Connected to local Agent Runtime!". Check the agent-runtime terminal for a "Plugin connected to Agent Runtime." 
+       * You should see a Notice in Obsidian: "Connected to local Agent Runtime!". Check the runtime terminal for a "Plugin connected to Agent Runtime." 
          message.
 
   ---
@@ -98,7 +98,7 @@ Test Plan: Opencode V5+ Core Functionality
    16         # V4
    17         { "status": "initial" }
        * Save the note.
-       * Verify: Check the agent-runtime terminal. You should see messages like "Processing file: notes/my-first-node.md" and "✅ Wrote node data to 
+       * Verify: Check the runtime terminal. You should see messages like "Processing file: notes/my-first-node.md" and "✅ Wrote node data to 
          .../nodes/0x...json". A new .json file should appear in vaults/agents/my-test-vault/nodes/.
 
    2. Visualize Nodes:
@@ -125,7 +125,7 @@ Test Plan: Opencode V5+ Core Functionality
        * Run the command: Opencode Agent: Commit agent vault state.
        * Enter my-test-vault for the vault name and my-agent-id for the agent ID.
        * Verify:
-           * Check the agent-runtime terminal. You should see messages about state commitment and IPFS pinning.
+           * Check the runtime terminal. You should see messages about state commitment and IPFS pinning.
            * Check vaults/agents/my-test-vault/.immutable-history/manifest.json. It should contain a new entry with a CID.
            * If IPFS daemon is running: You should see the CID being pinned in your IPFS daemon logs.
 

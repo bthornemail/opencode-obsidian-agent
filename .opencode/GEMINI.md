@@ -19,11 +19,11 @@ All work must adhere to the new, comprehensive specification document:
 
 As outlined in the plan, Phase 2 involves three key areas. The most critical and foundational of these is **Basic MCP Integration for context exchange**.
 
-Your task is to refactor the simple, ad-hoc RPC communication currently used between the `plugin` and the `agent-runtime` to strictly adhere to the **Model Context Protocol (MCP)** `IToolCommand` interfaces defined in the `@opencode-obsidian-workspace/core` package.
+Your task is to refactor the simple, ad-hoc RPC communication currently used between the `plugin` and the `runtime` to strictly adhere to the **Model Context Protocol (MCP)** `IToolCommand` interfaces defined in the `@opencode-obsidian-workspace/core` package.
 
 **Implementation Steps:**
 
-1.  Refactor the `agent-runtime`'s WebSocket server to be a pure MCP command processor. It should expect all incoming messages to be valid `IToolCommand` objects.
+1.  Refactor the `runtime`'s WebSocket server to be a pure MCP command processor. It should expect all incoming messages to be valid `IToolCommand` objects.
 2.  Refactor the `plugin`'s `client.ts` to construct and send proper `IToolCommand` objects for all actions (e.g., `ProcessFile`).
 3.  Update the `GetAllNodes` command (which we have not yet implemented) to be an MCP command.
 4.  Update the React UI to use this new MCP command to fetch and display the list of nodes from the runtime.

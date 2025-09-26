@@ -64,7 +64,7 @@ opencode-obsidian-workspace/
 ├─ server/                      # optional shared Opencode server wrapper
 │  ├─ src/
 │  └─ package.json
-├─ agent-runtime/               # background Node runtime (per-vault)
+├─ runtime/               # background Node runtime (per-vault)
 │  ├─ src/
 │  └─ package.json
 ├─ templates/
@@ -287,7 +287,7 @@ RUN npm ci --omit=dev
 COPY . .
 ENV NODE_ENV=production
 EXPOSE 4201
-CMD ["node", "dist/agent-runtime/index.js"]
+CMD ["node", "dist/runtime/index.js"]
 ```
 
 `docker-compose.yml` top-level can manage multiple vaults with separate services.
@@ -402,7 +402,7 @@ The runtime provides plugin hooks and batched background jobs for these tasks.
 ### computeMatrix (already given earlier), but cast into module:
 
 ```ts
-// agent-runtime/src/graph.ts
+// runtime/src/graph.ts
 import crypto from "crypto";
 
 export function hashStr(s: string) {
@@ -441,7 +441,7 @@ export function deriveWalletFromCentroid(centroidHex: string) {
 
 ## 15 — Roadmap & prioritized milestones
 
-**MVP (2–4 weeks)**: **[COMPLETED]** The foundational architecture is now implemented. This includes the `opencode-vault` CLI with `create` and `start` commands, a background `agent-runtime` with file watching and node processing capabilities, and a refactored Obsidian `plugin` that correctly connects to its dedicated runtime.
+**MVP (2–4 weeks)**: **[COMPLETED]** The foundational architecture is now implemented. This includes the `opencode-vault` CLI with `create` and `start` commands, a background `runtime` with file watching and node processing capabilities, and a refactored Obsidian `plugin` that correctly connects to its dedicated runtime.
 
 **Phase 2 (4–8 weeks)**:
 
