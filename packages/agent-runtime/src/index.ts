@@ -4,7 +4,7 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 import { Trie } from 'merkle-patricia-tree';
 import { createHelia } from 'helia';
-import { IToolCommand, NodeUpdateMessage, TetraNode } from '@opencode-v5/core';
+import { IToolCommand, NodeUpdateMessage, TetraNode } from '@opencode-obsidian-workspace/core';
 
 // ... (Argument Parsing & Paths)
 
@@ -61,18 +61,96 @@ async function handlePinStateToIPFS(args: { vaultName: string; cid: string }) {
     }
 }
 
+async function handleCommand(toolCommand: IToolCommand): Promise<any> {
+    let responsePayload: any;
+
+                switch (toolCommand.commandName) {
+                    case 'GetAllNodes':
+                        // For now, return a mock list of nodes
+                        responsePayload = [
+                            {
+                                nodeId: 'mock-node-1',
+                                staticCentroid: 'mock-static-centroid-1',
+                                dynamicCentroid: 'mock-dynamic-centroid-1',
+                                timestamp: Date.now(),
+                            },
+                            {
+                                nodeId: 'mock-node-2',
+                                staticCentroid: 'mock-static-centroid-2',
+                                dynamicCentroid: 'mock-dynamic-centroid-2',
+                                timestamp: Date.now(),
+                            },
+                        ];
+                        break;
+                    case 'CreateAgentVault':
+                        const { vaultName: createVaultName } = toolCommand.arguments;
+                        console.log(`Creating agent vault: ${createVaultName}`);
+                        responsePayload = { success: true, vaultName: createVaultName };
+                        break;
+                    case 'ExecuteShell':
+                        const { vaultName: execVaultName, command: shellCommand } = toolCommand.arguments;
+                        console.log(`Executing shell command "${shellCommand}" in vault: ${execVaultName}`);
+                        responsePayload = { vaultName: execVaultName, stdout: `Executed: ${shellCommand}`, stderr: '' };
+                        break;
+                    case 'CommitState':
+                        const { vaultName: commitVaultName, agentId } = toolCommand.arguments;
+                        console.log(`Committing state for vault: ${commitVaultName}, agent: ${agentId}`);
+                        responsePayload = { success: true, vaultName: commitVaultName, agentId };
+                        break;
+                    case 'SetVaultContext':
+                        const { vaultName: setContextVaultName, context } = toolCommand.arguments;
+                        console.log(`Setting context for vault: ${setContextVaultName}`, context);
+                        responsePayload = { success: true, vaultName: setContextVaultName };
+                        break;
+                    case 'PublishNode':
+                        const { nodeId: publishNodeId } = toolCommand.arguments;
+                        console.log(`Publishing node: ${publishNodeId}`);
+                        responsePayload = { success: true, nodeId: publishNodeId };
+                        break;
+                    case 'GetHistoryProof':
+                        const { nodeId: historyNodeId, timestamp: historyTimestamp } = toolCommand.arguments;
+                        console.log(`Getting history proof for node: ${historyNodeId} at ${historyTimestamp}`);
+                        responsePayload = { root: 'mockRoot', value: 'mockValue', proof: [] };
+                        break;
+                    case 'WikifyAndTag':
+                        const { filePath: wikifyFilePath } = toolCommand.arguments;
+                        console.log(`Wikifying and tagging file: ${wikifyFilePath}`);
+                        responsePayload = { success: true, message: 'Mock wikification complete.' };
+                        break;
+                    case 'ProcessFile':
+                        const { filePath: processFilePath } = toolCommand.arguments;
+                        console.log(`Processing file: ${processFilePath}`);
+                        responsePayload = { success: true, message: `File ${processFilePath} processed.` };
+                        break;
+                    default:
+                        responsePayload = { error: `Unknown command: ${toolCommand.commandName}` };
+                }    return { ...responsePayload, commandName: toolCommand.commandName };
+}
+
 console.log(`✅ Agent Runtime is running for vault: ${vaultPath}`);
 // ... (other logs)
 
 wss.on('connection', ws => {
     console.log('Plugin connected to Agent Runtime.');
-    ws.on('message', (message) => {
+    ws.on('message', async message => {
         try {
-            const command = JSON.parse(message.toString()) as IToolCommand;
-            console.log(`Received command from plugin: ${command.commandName}`);
-            handleCommand(command, ws);
-        } catch (e) {
-            console.error("Invalid command from plugin", e);
+            const toolCommand: IToolCommand = JSON.parse(message.toString());
+            console.log('Received IToolCommand:', toolCommand);
+
+            const responsePayload = await handleCommand(toolCommand);
+
+            ws.send(JSON.stringify({
+                type: 'MCP_RESPONSE',
+                requestId: toolCommand.id,
+                payload: responsePayload,
+            }));
+
+        } catch (error: any) {
+            console.error('Error processing message:', error);
+            ws.send(JSON.stringify({
+                type: 'MCP_ERROR',
+                error: error.message,
+            }));
         }
     });
 });

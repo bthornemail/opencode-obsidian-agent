@@ -1,9 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "paths": {
-      "@opencode-v5/core": ["../core/dist"]
-    },
     "noImplicitAny": true,
     "strictNullChecks": true,
     "lib": [
@@ -15,7 +12,8 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "../../core/dist/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

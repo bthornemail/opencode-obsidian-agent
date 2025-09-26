@@ -6,6 +6,7 @@ export class CreateVaultModal extends Modal {
 
     constructor(app: App, onSubmit: (result: string) => void) {
         super(app);
+        this.result = ""; // Initialize result
         this.onSubmit = onSubmit;
     }
 

@@ -7,6 +7,8 @@ export class ExecuteShellModal extends Modal {
 
     constructor(app: App, onSubmit: (vaultName: string, command: string) => void) {
         super(app);
+        this.vaultName = ""; // Initialize vaultName
+        this.command = "";     // Initialize command
         this.onSubmit = onSubmit;
     }
 

@@ -1,14 +1,14 @@
 import { App, Notice, Plugin, WorkspaceLeaf, Platform, TFile, TAbstractFile } from 'obsidian';
 import { OpencodeAgentClient } from './src/client';
-// import { IToolCommand, TetraNode, NodeUpdateMessage, IAgentVaultContext, verifyProof } from '@opencode-v5/core';
+import { IToolCommand, TetraNode, NodeUpdateMessage, IAgentVaultContext, verifyProof } from '@opencode-obsidian-workspace/core';
 import { OpencodeAgentSettings, DEFAULT_SETTINGS, OpencodeAgentSettingTab } from './settings/settings';
 import { GraphView, GRAPH_VIEW_TYPE } from './ui/GraphView';
 import { CreateVaultModal } from './src/ui/CreateVaultModal';
 import { ExecuteShellModal } from './src/ui/ExecuteShellModal';
 
 export default class OpencodeAgentPlugin extends Plugin {
-    settings: OpencodeAgentSettings;
-    client: OpencodeAgentClient; // Declare the client property
+    settings!: OpencodeAgentSettings;
+    client!: OpencodeAgentClient; // Declare the client property
 
     async onload() {
         console.time("OpencodeAgentPlugin onload");
@@ -148,15 +148,30 @@ export default class OpencodeAgentPlugin extends Plugin {
             new Notice('Connected to local Agent Runtime!');
 
             this.client.onMessage(async (message: any) => {
-                if (message.command === 'ExecuteShell') {
-                    if (message.error) {
-                        new Notice(`Error executing command: ${message.error}`);
-                        console.error('Shell Error:', message.stderr);
-                    } else {
-                        new Notice(`Command finished in ${message.vaultName}.\nOutput: ${message.stdout}`);
-                        console.log('Shell Output:', message.stdout);
-                        console.error('Shell Stderr:', message.stderr);
+                if (message.type === 'MCP_RESPONSE') {
+                    const { requestId, payload } = message;
+                    // Handle responses based on the original command's requestId if needed
+                    // For now, we'll just log and show notices for specific command responses
+                    if (payload.commandName === 'ExecuteShell') { // Assuming payload contains commandName for context
+                        if (payload.error) {
+                            new Notice(`Error executing command: ${payload.error}`);
+                            console.error('Shell Error:', payload.stderr);
+                        } else {
+                            new Notice(`Command finished in ${payload.vaultName}.\nOutput: ${payload.stdout}`);
+                            console.log('Shell Output:', payload.stdout);
+                            console.error('Shell Stderr:', payload.stderr);
+                        }
+                    } else if (payload.commandName === 'CreateAgentVault') {
+                        if (payload.error) {
+                            new Notice(`Error creating vault: ${payload.error}`);
+                        } else {
+                            new Notice(`Vault created: ${payload.vaultName}`);
+                        }
                     }
+                    // Add more handlers for other command responses as needed
+                } else if (message.type === 'MCP_ERROR') {
+                    new Notice(`Agent Runtime Error: ${message.error}`);
+                    console.error('Agent Runtime Error:', message.error);
                 }
             });
 
@@ -276,9 +291,13 @@ export default class OpencodeAgentPlugin extends Plugin {
             leaf = leaves[0];
         } else {
             leaf = this.app.workspace.getRightLeaf(false);
-            await leaf.setViewState({ type: GRAPH_VIEW_TYPE, active: true });
+            if (leaf) {
+                await leaf.setViewState({ type: GRAPH_VIEW_TYPE, active: true });
+            }
         }
 
-        this.app.workspace.revealLeaf(leaf);
+        if (leaf) {
+            this.app.workspace.revealLeaf(leaf);
+        }
     }
 }

@@ -19,7 +19,7 @@ All work must adhere to the new, comprehensive specification document:
 
 As outlined in the plan, Phase 2 involves three key areas. The most critical and foundational of these is **Basic MCP Integration for context exchange**.
 
-Your task is to refactor the simple, ad-hoc RPC communication currently used between the `plugin` and the `agent-runtime` to strictly adhere to the **Model Context Protocol (MCP)** `IToolCommand` interfaces defined in the `@opencode-v5/core` package.
+Your task is to refactor the simple, ad-hoc RPC communication currently used between the `plugin` and the `agent-runtime` to strictly adhere to the **Model Context Protocol (MCP)** `IToolCommand` interfaces defined in the `@opencode-obsidian-workspace/core` package.
 
 **Implementation Steps:**
 

@@ -1,10 +1,17 @@
 {
-  "name": "opencode-v5-monorepo",
+  "name": "opencode-obsidian-workspace",
   "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/server/*",
+    "packages/plugin/*",
+    "packages/agents/*",
+    "packages/cli/*"
+  ],
   "scripts": {
     "dev": "pnpm --parallel --stream dev",
     "build": "pnpm --parallel --stream build",
-    "build-core": "pnpm install && pnpm --filter @opencode-v5/core build"
+    "build-core": "pnpm install && pnpm --filter @opencode-obsidian-workspace/core build"
   },
   "devDependencies": {
     "@types/node": "^16.18.126",

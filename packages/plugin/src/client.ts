@@ -1,6 +1,4 @@
-import WebSocket from 'ws';
-import { v4 as uuidv4 } from 'uuid';
-import { IToolCommand, TetraNode } from '@opencode-v5/core';
+import { IToolCommand, TetraNode, IAgentVaultContext } from '@opencode-obsidian-workspace/core';
 
 export type MessageCallback = (message: any) => void;
 
@@ -47,7 +45,68 @@ export class OpencodeAgentClient {
         });
     }
 
-    // ... (disconnect, onMessage)
+    disconnect() {
+        if (this.ws) {
+            this.ws.close();
+            this.ws = null;
+        }
+    }
+
+    onMessage(callback: MessageCallback) {
+        this.messageListeners.push(callback);
+    }
+
+    createAgentVault(vaultName: string): Promise<any> {
+        return new Promise((resolve) => {
+            const command: IToolCommand = {
+                id: uuidv4(),
+                commandName: 'CreateAgentVault',
+                arguments: { vaultName },
+                timestamp: Date.now(),
+            };
+            this.pendingRequests.set(command.id, resolve);
+            this.sendCommand(command);
+        });
+    }
+
+    executeShell(vaultName: string, command: string): Promise<any> {
+        return new Promise((resolve) => {
+            const cmd: IToolCommand = {
+                id: uuidv4(),
+                commandName: 'ExecuteShell',
+                arguments: { vaultName, command },
+                timestamp: Date.now(),
+            };
+            this.pendingRequests.set(cmd.id, resolve);
+            this.sendCommand(cmd);
+        });
+    }
+
+    commitState(vaultName: string, agentId: string): Promise<any> {
+        return new Promise((resolve) => {
+            const command: IToolCommand = {
+                id: uuidv4(),
+                commandName: 'CommitState',
+                arguments: { vaultName, agentId },
+                timestamp: Date.now(),
+            };
+            this.pendingRequests.set(command.id, resolve);
+            this.sendCommand(command);
+        });
+    }
+
+    setVaultContext(vaultName: string, context: IAgentVaultContext): Promise<any> {
+        return new Promise((resolve) => {
+            const command: IToolCommand = {
+                id: uuidv4(),
+                commandName: 'SetVaultContext',
+                arguments: { vaultName, context },
+                timestamp: Date.now(),
+            };
+            this.pendingRequests.set(command.id, resolve);
+            this.sendCommand(command);
+        });
+    }
 
     public sendCommand(command: IToolCommand) {
         if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {

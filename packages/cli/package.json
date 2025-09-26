@@ -1,5 +1,5 @@
 {
-  "name": "opencode-vault-cli",
+	"name": "@opencode-obsidian-workspace/cli",
   "version": "1.0.0",
   "description": "CLI for managing Opencode Agentic Vaults",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js && chmod +x dist/index.js"
   },
   "dependencies": {
-    "@opencode-v5/core": "workspace:*",
+    "@opencode-obsidian-workspace/core": "workspace:*",
     "commander": "^14.0.1"
   },
   "devDependencies": {

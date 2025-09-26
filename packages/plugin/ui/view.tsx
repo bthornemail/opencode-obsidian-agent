@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from './context';
 import { App } from 'obsidian';
 import { OpencodeAgentClient } from '../src/client'; // Assuming client is accessible
-import { TetraNode } from '@opencode-v5/core';
+import { TetraNode } from '@opencode-obsidian-workspace/core';
 
 const useApp = (): App | undefined => {
     return useContext(AppContext);

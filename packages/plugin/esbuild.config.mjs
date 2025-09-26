@@ -31,6 +31,7 @@ const context = await esbuild.context({
 		"@lezer/common",
 		"@lezer/highlight",
 		"@lezer/lr",
+		"@opencode-obsidian-workspace/core",
 		...builtins],
 	format: "cjs",
 	target: "es2018",

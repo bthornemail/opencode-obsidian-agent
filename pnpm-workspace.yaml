@@ -3,3 +3,11 @@ packages:
 
 ignoredBuiltDependencies:
   - '@ipshipyard/node-datachannel'
+  - esbuild
+
+onlyBuiltDependencies:
+  - keccak
+  - secp256k1
+
+overrides:
+  esbuild@<=0.24.2: '>=0.25.0'

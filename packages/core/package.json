@@ -1,7 +1,7 @@
 {
-  "name": "@opencode-v5/core",
+  "name": "@opencode-obsidian-workspace/core",
   "version": "1.0.0",
-  "description": "Core logic (TetraNode, types) for the Opencode V5 Environment",
+  "description": "Core logic (TetraNode, types) for the Opencode Obsidian Workspace",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

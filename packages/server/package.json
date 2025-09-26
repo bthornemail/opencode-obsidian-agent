@@ -1,5 +1,5 @@
 {
-  "name": "opencode-global-relay-server",
+	"name": "@opencode-obsidian-workspace/server",
   "version": "1.0.0",
   "description": "Global WebSocket Relay Server for Opencode V5+",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js"
   },
   "dependencies": {
-    "@opencode-v5/core": "workspace:*",
+    "@opencode-obsidian-workspace/core": "workspace:*",
     "ws": "^8.13.0"
   },
   "devDependencies": {

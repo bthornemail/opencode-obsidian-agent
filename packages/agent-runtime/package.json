@@ -1,14 +1,14 @@
 {
-  "name": "agent-runtime",
+	"name": "@opencode-obsidian-workspace/runtime",
   "version": "1.0.0",
   "description": "Background agent runtime for a single vault",
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js"
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:chokidar"
   },
   "dependencies": {
-    "@opencode-v5/core": "workspace:*",
+    "@opencode-obsidian-workspace/core": "workspace:*",
     "helia": "^5.5.1",
     "wink-eng-lite-web-model": "^1.8.1",
     "wink-nlp": "^2.4.0",
