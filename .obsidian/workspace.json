@@ -168,6 +168,7 @@
   },
   "active": "d031891ea60428b8",
   "lastOpenFiles": [
+    "agent-runtime/Dockerfile",
     "_tmp_187435_f43d9704f6e98c57197c80ebe88670a0",
     "packages/core/src/verification.ts",
     "packages/core/src/types.ts",
@@ -178,7 +179,6 @@
     "packages/core/src",
     "packages/core",
     "packages",
-    "agent-runtime/src/core/verification.ts",
     "plugin/node_modules/@opencode-ai/sdk/node_modules/@hey-api/openapi-ts/README.md",
     "plugin/node_modules/@opencode-ai/sdk/node_modules/@hey-api/openapi-ts/LICENSE.md",
     "plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/unified-signatures.md",

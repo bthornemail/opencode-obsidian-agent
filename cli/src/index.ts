@@ -16,14 +16,40 @@ program
     // ... (create command implementation)
 
 program
+    .command('build <vault-name>')
+    .description('Build a Docker image for the specified agent vault runtime')
+    .action(async (vaultName) => {
+        const imageName = `agent-runtime-${vaultName.toLowerCase()}`;
+        console.log(`Building Docker image: ${imageName}...`);
+
+        const buildProcess = spawn('docker', [
+            'build',
+            '-t',
+            imageName,
+            '-f',
+            'agent-runtime/Dockerfile',
+            '.' // Build context is the root of the monorepo
+        ], {
+            stdio: 'inherit', // Stream the build output to the user's console
+            cwd: process.cwd(),
+        });
+
+        buildProcess.on('close', (code) => {
+            if (code === 0) {
+                console.log(`✅ Successfully built image: ${imageName}`);
+            } else {
+                console.error(`❌ Docker build failed with code ${code}`);
+            }
+        });
+    });
+
+program
     .command('start <vault-name>')
     .description('Start the agent runtime for a specific vault')
     .option('-p, --port <port>', 'Port for the agent runtime RPC server', '4201')
+    .option('--docker', 'Run the agent runtime inside a Docker container')
     .action(async (vaultName, options) => {
-        console.log(`Starting agent runtime for vault: ${vaultName}...`);
-
         const vaultPath = path.join(process.cwd(), 'vaults', 'agents', vaultName);
-        const runtimeLogPath = path.join(vaultPath, '.agent.log');
         const runtimePidPath = path.join(vaultPath, '.agent.pid');
 
         try {
@@ -33,29 +59,55 @@ program
             return;
         }
 
-        const logStream = await fs.open(runtimeLogPath, 'a');
+        if (options.docker) {
+            // --- Docker Execution ---
+            const imageName = `agent-runtime-${vaultName.toLowerCase()}`;
+            console.log(`Starting agent runtime for vault "${vaultName}" using Docker image: ${imageName}...`);
 
-        const runtimeProcess = spawn(
-            'ts-node',
-            [
-                path.join(process.cwd(), 'agent-runtime', 'src', 'index.ts'),
-                `--vaultPath=${vaultPath}`,
-                `--port=${options.port}`
-            ],
-            {
-                detached: true, // Allows parent process to exit
-                stdio: ['ignore', logStream.fd, logStream.fd], // Pipe stdout and stderr to log file
-                cwd: process.cwd(),
-            }
-        );
+            const runProcess = spawn('docker', [
+                'run',
+                '-d', // Detached mode
+                '--rm', // Automatically remove the container on exit
+                '-p', `${options.port}:4201`,
+                '-v', `${vaultPath}:/vault`,
+                imageName,
+                '--vaultPath=/vault' // Argument for the runtime inside the container
+            ], {
+                detached: true,
+                stdio: 'ignore',
+            });
 
-        runtimeProcess.unref(); // Disconnect from parent process
+            runProcess.unref();
+            // Note: Getting the container ID to save as a PID is more complex, skipping for this implementation.
+            console.log(`✅ Agent runtime for "${vaultName}" started in Docker.`);
+            console.log(`   Container is running in detached mode. Use 'docker ps' to see it.`);
 
-        await fs.writeFile(runtimePidPath, String(runtimeProcess.pid));
+        } else {
+            // --- Local ts-node Execution ---
+            console.log(`Starting agent runtime for vault "${vaultName}" locally...`);
+            const runtimeLogPath = path.join(vaultPath, '.agent.log');
+            const logStream = await fs.open(runtimeLogPath, 'a');
 
-        console.log(`✅ Agent runtime for "${vaultName}" started successfully.`);
-        console.log(`   PID: ${runtimeProcess.pid} (saved to ${runtimePidPath})`);
-        console.log(`   Logs are being written to ${runtimeLogPath}`);
+            const runtimeProcess = spawn(
+                'ts-node',
+                [
+                    path.join(process.cwd(), 'agent-runtime', 'src', 'index.ts'),
+                    `--vaultPath=${vaultPath}`,
+                    `--port=${options.port}`
+                ],
+                {
+                    detached: true,
+                    stdio: ['ignore', logStream.fd, logStream.fd],
+                    cwd: process.cwd(),
+                }
+            );
+
+            runtimeProcess.unref();
+            await fs.writeFile(runtimePidPath, String(runtimeProcess.pid));
+            console.log(`✅ Agent runtime for "${vaultName}" started successfully.`);
+            console.log(`   PID: ${runtimeProcess.pid} (saved to ${runtimePidPath})`);
+            console.log(`   Logs are being written to ${runtimeLogPath}`);
+        }
     });
 
 program.parse(process.argv);
