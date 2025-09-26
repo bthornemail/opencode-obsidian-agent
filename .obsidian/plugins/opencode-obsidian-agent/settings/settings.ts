@@ -4,14 +4,17 @@ import OpencodeAgentPlugin from '../main'; // Correct import path
 export interface OpencodeAgentSettings {
     walletAddress: string;
     peerId: string;
+    pluginEndpoint: string;
 }
 
 export const DEFAULT_SETTINGS: OpencodeAgentSettings = {
     walletAddress: '',
     peerId: `peer-${Date.now()}`,
+    pluginEndpoint: 'ws://localhost:8080',
 };
 
 export class OpencodeAgentSettingTab extends PluginSettingTab {
+    static ID = 'opencode-agent-settings';
     plugin: OpencodeAgentPlugin; // Correct type
 
     constructor(app: App, plugin: OpencodeAgentPlugin) {
@@ -43,6 +46,17 @@ export class OpencodeAgentSettingTab extends PluginSettingTab {
                 .setValue(this.plugin.settings.peerId)
                 .onChange(async (value) => {
                     this.plugin.settings.peerId = value;
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName('Agent Runtime Endpoint')
+            .setDesc('The WebSocket URI for the local agent runtime (e.g., ws://localhost:8080).')
+            .addText(text => text
+                .setPlaceholder('ws://localhost:8080')
+                .setValue(this.plugin.settings.pluginEndpoint)
+                .onChange(async (value) => {
+                    this.plugin.settings.pluginEndpoint = value;
                     await this.plugin.saveSettings();
                 }));
     }

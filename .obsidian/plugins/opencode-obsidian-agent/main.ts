@@ -103,6 +103,17 @@ export default class OpencodeAgentPlugin extends Plugin {
             callback: () => this.visualizeGraph(),
         });
 
+        this.addCommand({
+            id: 'open-opencode-settings',
+            name: 'Open Opencode Agent Settings',
+            callback: () => {
+                // @ts-ignore
+                this.app.setting.open();
+                // @ts-ignore
+                this.app.setting.openTabById(OpencodeAgentSettingTab.ID);
+            },
+        });
+
         this.addSettingTab(new OpencodeAgentSettingTab(this.app, this));
 
         this.app.workspace.onLayoutReady(() => {
@@ -130,18 +141,10 @@ export default class OpencodeAgentPlugin extends Plugin {
         }
 
         try {
-            const configFile = this.app.vault.getAbstractFileByPath('agent-config.json');
-            if (!configFile || !(configFile instanceof TFile)) {
-                new Notice('agent-config.json not found in vault root. Cannot connect to runtime.');
-                return;
-            }
-
-            const configContent = await this.app.vault.read(configFile);
-            const config = JSON.parse(configContent);
-            const endpoint = config.pluginEndpoint;
+            const endpoint = this.settings.pluginEndpoint;
 
             if (!endpoint) {
-                new Notice('pluginEndpoint not found in agent-config.json.');
+                new Notice('Agent Runtime Endpoint is not configured in settings.');
                 return;
             }
 
