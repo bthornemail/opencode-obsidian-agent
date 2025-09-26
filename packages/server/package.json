@@ -8,6 +8,7 @@
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js"
   },
   "dependencies": {
+    "@opencode-v5/core": "workspace:*",
     "ws": "^8.13.0"
   },
   "devDependencies": {

@@ -1,25 +1,17 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@opencode-v5/core": ["../packages/core/dist"]
+      "@opencode-v5/core": ["../core/dist"]
     },
-    "module": "ESNext",
-    "target": "ES6",
-    "allowJs": true,
     "noImplicitAny": true,
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "isolatedModules": true,
     "strictNullChecks": true,
     "lib": [
       "DOM",
       "ES5",
       "ES6",
       "ES7"
-    ],
-    "jsx": "react-jsx",
-    "allowSyntheticDefaultImports": true
+    ]
   },
   "include": [
     "**/*.ts",

@@ -11,6 +11,7 @@
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js && chmod +x dist/index.js"
   },
   "dependencies": {
+    "@opencode-v5/core": "workspace:*",
     "commander": "^14.0.1"
   },
   "devDependencies": {

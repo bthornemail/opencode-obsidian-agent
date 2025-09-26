@@ -1,8 +1,4 @@
 packages:
-  - cli
-  - server
-  - agent-runtime
-  - plugin
   - packages/*
 
 ignoredBuiltDependencies:
