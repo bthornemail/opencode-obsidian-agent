@@ -255,7 +255,7 @@ export default class OpencodeAgentPlugin extends Plugin {
         const nodeId = fileFrontmatter?.['tetranode_id'];
 
         if (!nodeId) {
-            new Notice('Active file is not a valid TetraNode (missing tetranode_id). First, run the 'Create/update' command.');
+            new Notice(`Active file is not a valid TetraNode (missing tetranode_id). First, run the 'Create/update' command.`);
             return;
         }
 

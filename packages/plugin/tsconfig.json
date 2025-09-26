@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@opencode-v5/core": ["../packages/core/src"]
+      "@opencode-v5/core": ["../packages/core/dist"]
     },
     "module": "ESNext",
     "target": "ES6",

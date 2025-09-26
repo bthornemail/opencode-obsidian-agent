@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  global-relay-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - opencode-network
+
+  agent-runtime-my-test-vault:
+    build:
+      context: ./agent-runtime
+      dockerfile: Dockerfile
+    ports:
+      - "4201:4201"
+    volumes:
+      - ./vaults/agents/my-test-vault:/vault
+    environment:
+      - VAULT_PATH=/vault
+      - PORT=4201
+    depends_on:
+      - global-relay-server
+    restart: always
+    networks:
+      - opencode-network
+
+  # You can add more agent-runtime services for other vaults here
+  # agent-runtime-another-vault:
+  #   build:
+  #     context: ./agent-runtime
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "4202:4201" # Map host port 4202 to container port 4201
+  #   volumes:
+  #     - ./vaults/agents/another-vault:/vault
+  #   environment:
+  #     - VAULT_PATH=/vault
+  #     - PORT=4201
+  #   depends_on:
+  #     - global-relay-server
+  #   restart: always
+  #   networks:
+  #     - opencode-network
+
+networks:
+  opencode-network:
+    driver: bridge
