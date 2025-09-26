@@ -5,12 +5,16 @@ export interface OpencodeAgentSettings {
     walletAddress: string;
     peerId: string;
     pluginEndpoint: string;
+    serverPort: number;
+    runtimePort: number;
 }
 
 export const DEFAULT_SETTINGS: OpencodeAgentSettings = {
     walletAddress: '',
     peerId: `peer-${Date.now()}`,
     pluginEndpoint: 'ws://localhost:8080',
+    serverPort: 9090,
+    runtimePort: 8080,
 };
 
 export class OpencodeAgentSettingTab extends PluginSettingTab {
@@ -58,6 +62,50 @@ export class OpencodeAgentSettingTab extends PluginSettingTab {
                 .onChange(async (value) => {
                     this.plugin.settings.pluginEndpoint = value;
                     await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName('Global Relay Server Port')
+            .setDesc('The port for the Global Relay Server (packages/server).')
+            .addText(text => text
+                .setPlaceholder('9090')
+                .setValue(this.plugin.settings.serverPort.toString())
+                .onChange(async (value) => {
+                    this.plugin.settings.serverPort = parseInt(value, 10);
+                    await this.plugin.saveSettings();
+                }));
+
+        new Setting(containerEl)
+            .setName('Agent Runtime Port')
+            .setDesc('The port for the Agent Runtime (packages/runtime).')
+            .addText(text => text
+                .setPlaceholder('8080')
+                .setValue(this.plugin.settings.runtimePort.toString())
+                .onChange(async (value) => {
+                    this.plugin.settings.runtimePort = parseInt(value, 10);
+                    await this.plugin.saveSettings();
+                }));
+
+        containerEl.createEl("h2", { text: "Manage Settings" });
+
+        new Setting(containerEl)
+            .setName("Save Settings to File")
+            .setDesc("Export current plugin settings to a JSON file.")
+            .addButton(button => button
+                .setButtonText("Save")
+                .setCta()
+                .onClick(async () => {
+                    await this.plugin.saveSettingsToFile();
+                }));
+
+        new Setting(containerEl)
+            .setName("Load Settings from File")
+            .setDesc("Import plugin settings from a JSON file.")
+            .addButton(button => button
+                .setButtonText("Load")
+                .setCta()
+                .onClick(async () => {
+                    await this.plugin.loadSettingsFromFile();
                 }));
     }
 }

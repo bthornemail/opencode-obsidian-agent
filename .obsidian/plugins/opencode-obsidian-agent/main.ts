@@ -6,6 +6,9 @@ import { OpencodeAgentSettings, DEFAULT_SETTINGS, OpencodeAgentSettingTab } from
 import { GraphView, GRAPH_VIEW_TYPE } from './ui/GraphView';
 import { CreateVaultModal } from './src/ui/CreateVaultModal';
 import { ExecuteShellModal } from './src/ui/ExecuteShellModal';
+import { AgentIdentityModal } from './src/ui/AgentIdentityModal';
+
+const AGENT_IDENTITIES_PATH = 'agents/identities';
 
 export default class OpencodeAgentPlugin extends Plugin {
     settings!: OpencodeAgentSettings;
@@ -50,6 +53,19 @@ export default class OpencodeAgentPlugin extends Plugin {
                         this.client.executeShell(vaultName, command);
                         new Notice(`Executing "${command}" in vault: ${vaultName}`);
                     }
+                }).open();
+            }
+        });
+
+        this.addCommand({
+            id: 'manage-agent-identity',
+            name: 'Manage Agent Identity',
+            callback: async () => {
+                const agentId = "default-agent"; // For now, hardcode a default agent ID
+                const currentContent = await this.loadAgentIdentity(agentId);
+                new AgentIdentityModal(this.app, agentId, currentContent, async (editedAgentId, editedContent) => {
+                    await this.saveAgentIdentity(editedAgentId, editedContent);
+                    new Notice(`Agent ${editedAgentId} identity saved.`);
                 }).open();
             }
         });
@@ -132,6 +148,82 @@ export default class OpencodeAgentPlugin extends Plugin {
 
     async saveSettings() {
         await this.saveData(this.settings);
+    }
+
+    async saveSettingsToFile() {
+        try {
+            const filePath = 'opencode-agent-settings.json'; // Default file name
+            const settingsJson = JSON.stringify(this.settings, null, 2);
+            await this.app.vault.create(filePath, settingsJson);
+            new Notice(`Settings saved to ${filePath}`);
+        } catch (error: any) {
+            new Notice(`Failed to save settings: ${error.message}`);
+            console.error('Failed to save settings:', error);
+        }
+    }
+
+    async loadSettingsFromFile() {
+        try {
+            const filePath = 'opencode-agent-settings.json'; // Default file name
+            const file = this.app.vault.getAbstractFileByPath(filePath);
+
+            if (!file || !(file instanceof TFile)) {
+                new Notice(`Settings file ${filePath} not found.`);
+                return;
+            }
+
+            const settingsJson = await this.app.vault.read(file);
+            const loadedSettings: OpencodeAgentSettings = JSON.parse(settingsJson);
+            this.settings = Object.assign({}, this.settings, loadedSettings);
+            await this.saveSettings(); // Persist loaded settings
+            new Notice(`Settings loaded from ${filePath}`);
+        } catch (error: any) {
+            new Notice(`Failed to load settings: ${error.message}`);
+            console.error('Failed to load settings:', error);
+        }
+    }
+
+    private getAgentIdentityFilePath(agentId: string): string {
+        return `${AGENT_IDENTITIES_PATH}/${agentId}.json`;
+    }
+
+    async loadAgentIdentity(agentId: string): Promise<string> {
+        try {
+            const filePath = this.getAgentIdentityFilePath(agentId);
+            const file = this.app.vault.getAbstractFileByPath(filePath);
+
+            if (!file || !(file instanceof TFile)) {
+                // If file not found, return empty JSON
+                return "{}";
+            }
+
+            return await this.app.vault.read(file);
+        } catch (error) {
+            console.error(`Failed to load agent identity for ${agentId}:`, error);
+            return "{}"; // Return empty JSON on error
+        }
+    }
+
+    async saveAgentIdentity(agentId: string, content: string): Promise<void> {
+        try {
+            const filePath = this.getAgentIdentityFilePath(agentId);
+            const file = this.app.vault.getAbstractFileByPath(filePath);
+
+            if (file && file instanceof TFile) {
+                await this.app.vault.modify(file, content);
+            } else {
+                // Ensure the directory exists
+                const dirPath = AGENT_IDENTITIES_PATH;
+                if (!await this.app.vault.adapter.exists(dirPath)) {
+                    await this.app.vault.createFolder(dirPath);
+                }
+                await this.app.vault.create(filePath, content);
+            }
+            new Notice(`Agent identity for ${agentId} saved.`);
+        } catch (error: any) {
+            new Notice(`Failed to save agent identity for ${agentId}: ${error.message}`);
+            console.error(`Failed to save agent identity for ${agentId}:`, error);
+        }
     }
 
     async connectToLocalRuntime() {
@@ -243,7 +335,7 @@ export default class OpencodeAgentPlugin extends Plugin {
             return;
         }
 
-        new Notice(`Requesting proof for ${nodeId.substring(0,12)} at time ${timestamp}...`);
+        new Notice(`Requesting proof for ${nodeId.substring(0, 12)} at time ${timestamp}...`);
         const response = await this.client.getHistoryProof(nodeId, timestamp);
 
         if (response.error) {
@@ -278,12 +370,12 @@ export default class OpencodeAgentPlugin extends Plugin {
             return;
         }
 
-        new Notice(`Publishing node ${nodeId.substring(0,12)}... to global network.`);
+        new Notice(`Publishing node ${nodeId.substring(0, 12)}... to global network.`);
         const response = await this.client.publishNode(nodeId);
         if (response.error) {
             new Notice(`Failed to publish: ${response.error}`);
         } else {
-            new Notice(`Successfully published node ${nodeId.substring(0,12)}.`);
+            new Notice(`Successfully published node ${nodeId.substring(0, 12)}.`);
         }
     }
 

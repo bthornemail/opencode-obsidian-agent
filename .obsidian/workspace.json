@@ -94,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "TETRAHEDRAL_BRAIN_REFERENCE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for TETRAHEDRAL_BRAIN_REFERENCE"
             }
           },
           {
@@ -152,8 +153,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 332.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -166,19 +166,19 @@
       "bases:Create new base": false
     }
   },
-  "active": "d031891ea60428b8",
+  "active": "a4149d6866804bae",
   "lastOpenFiles": [
-    "packages/plugin/main.js",
-    "packages/plugin/dist/version-bump.mjs",
-    "packages/plugin/dist/esbuild.config.mjs",
-    "packages/plugin/dist/main.js",
-    "packages/plugin/dist/src/ui/ExecuteShellModal.js",
-    "packages/plugin/dist/src/ui/CreateVaultModal.js",
-    "packages/plugin/dist/src/ui",
-    "packages/plugin/dist/ui/GraphView.js",
-    "packages/plugin/dist/ui/view.js",
-    "packages/plugin/dist/ui/context.js",
-    "packages/plugin/dist/ui",
+    "packages/plugin/1758930052041-package.json",
+    "packages/plugin/1758930049891-package.json",
+    "packages/plugin/1758930045901-package.json",
+    "packages/plugin/1758930038713-package.json",
+    "packages/plugin/1758930034641-package.json",
+    "packages/plugin/1758930030074-package.json",
+    "packages/plugin/1758930025622-package.json",
+    "packages/plugin/1758930013487-package.json",
+    "packages/plugin/1758930003574-package.json",
+    "packages/plugin/dist/src/ui/AgentIdentityModal.js",
+    "packages/plugin/src/ui/AgentIdentityModal.ts",
     "docs/opencode-master-specification/can you make a full document including the  compl....md",
     "docs/opencode-master-specification/can you help me define a new plan specification t....md",
     "docs/opencode-master-specification/can you help me define a new plan specification t... (4).md",
