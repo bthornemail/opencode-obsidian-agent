@@ -9,6 +9,7 @@ import { IToolCommand} from '../../core/dist/mcp-types';
 import { CID } from 'multiformats/cid' //https://www.npmjs.com/package/multiformats
 import * as json from 'multiformats/codecs/json'
 import { sha256 } from 'multiformats/hashes/sha2'
+import nodeDataChannel from 'node-datachannel';
 
 // --- Argument Parsing & Paths ---
 const args = process.argv.slice(2);

@@ -1,1 +1,5 @@
-[]
+[
+  "mobile-hot-reload",
+  "hot-reload",
+  "opencode-agent-plugin"
+]
