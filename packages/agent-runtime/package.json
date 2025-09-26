@@ -1,5 +1,5 @@
 {
-	"name": "@opencode-obsidian-workspace/runtime",
+  "name": "@opencode-obsidian-workspace/runtime",
   "version": "1.0.0",
   "description": "Background agent runtime for a single vault",
   "main": "dist/index.js",
@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "@opencode-obsidian-workspace/core": "workspace:*",
+    "chokidar": "^4.0.3",
+    "cid": "github:multiformats/cid",
     "helia": "^5.5.1",
+    "multiformats": "^11.0.2",
     "wink-eng-lite-web-model": "^1.8.1",
     "wink-nlp": "^2.4.0",
     "wordnet": "^2.0.0"

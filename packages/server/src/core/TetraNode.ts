@@ -73,9 +73,9 @@ export class TetraNode implements TetraNodeData {
      * @returns A Wallet instance.
      */
     public deriveWallet(): ethers.Wallet {
-        const seed = ethers.utils.toUtf8Bytes(this.staticCentroid);
-        const hashedSeed = ethers.utils.keccak256(seed);
-        const hdNode = ethers.utils.HDNode.fromSeed(hashedSeed);
+        const seed = ethers.toUtf8Bytes(this.staticCentroid);
+        const hashedSeed = ethers.keccak256(seed);
+        const hdNode = ethers.HDNodeWallet.fromSeed(hashedSeed);
         const childNode = hdNode.derivePath("m/44'/60'/0'/0/0");
         return new ethers.Wallet(childNode.privateKey);
     }
@@ -113,6 +113,6 @@ export class TetraNode implements TetraNodeData {
     }
 
     private hash(data: string): Hash {
-        return ethers.utils.sha256(ethers.utils.toUtf8Bytes(data));
+        return ethers.sha256(ethers.toUtf8Bytes(data));
     }
 }

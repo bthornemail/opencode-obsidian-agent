@@ -2,10 +2,13 @@ import { WebSocketServer, WebSocket } from 'ws';
 import chokidar from 'chokidar';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { Trie } from 'merkle-patricia-tree';
+import { BaseTrie as Trie } from 'merkle-patricia-tree';
 import { createHelia } from 'helia';
-import { IToolCommand, NodeUpdateMessage, TetraNode } from '@opencode-obsidian-workspace/core';
-
+import { TetraNode} from '../../core/dist/TetraNode';
+import { IToolCommand} from '../../core/dist/mcp-types';
+import { CID } from 'multiformats/cid' //https://www.npmjs.com/package/multiformats
+import * as json from 'multiformats/codecs/json'
+import { sha256 } from 'multiformats/hashes/sha2'
 // ... (Argument Parsing & Paths)
 
 // --- In-memory State ---

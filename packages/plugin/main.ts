@@ -1,6 +1,7 @@
 import { App, Notice, Plugin, WorkspaceLeaf, Platform, TFile, TAbstractFile } from 'obsidian';
 import { OpencodeAgentClient } from './src/client';
-import { IToolCommand, TetraNode, NodeUpdateMessage, IAgentVaultContext, verifyProof } from '@opencode-obsidian-workspace/core';
+import { IAgentVaultContext } from '../core/dist/mcp-types';
+import { verifyProof } from '../core/dist/verification';
 import { OpencodeAgentSettings, DEFAULT_SETTINGS, OpencodeAgentSettingTab } from './settings/settings';
 import { GraphView, GRAPH_VIEW_TYPE } from './ui/GraphView';
 import { CreateVaultModal } from './src/ui/CreateVaultModal';
@@ -250,7 +251,7 @@ export default class OpencodeAgentPlugin extends Plugin {
         const { root, value } = response;
         const proof = response.proof.map((p: string) => Buffer.from(p, 'hex'));
 
-        const verifiedValue = await verifyProof(root, Buffer.from(String(timestamp)), proof);
+        const verifiedValue = await verifyProof(root, String(timestamp), proof);
 
         if (verifiedValue && verifiedValue.toString() === value) {
             new Notice(`✅ Proof VALID for timestamp ${timestamp}`);
