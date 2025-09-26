@@ -12,6 +12,7 @@
     "wordnet": "^5.0.0",
     "wink-nlp": "^2.0.0",
     "wink-eng-lite-web-model": "^2.0.0",
+    "helia": "^1.0.0",
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
