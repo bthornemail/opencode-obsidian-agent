@@ -3,13 +3,13 @@ import chokidar from 'chokidar';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { BaseTrie as Trie } from 'merkle-patricia-tree';
-import { createHelia } from 'helia';
+// import { createHelia } from 'helia'; // Dynamically imported later
 import { TetraNode} from '../../core/dist/TetraNode';
 import { IToolCommand} from '../../core/dist/mcp-types';
-import { CID } from 'multiformats/cid' //https://www.npmjs.com/package/multiformats
-import * as json from 'multiformats/codecs/json'
-import { sha256 } from 'multiformats/hashes/sha2'
-import nodeDataChannel from 'node-datachannel';
+import {CID} from 'multiformats';
+// import * as json from 'multiformats/codecs/json'
+// import { sha256 } from 'multiformats/hashes/sha2'
+// import nodeDataChannel from 'node-datachannel';
 
 // --- Argument Parsing & Paths ---
 const args = process.argv.slice(2);
@@ -31,7 +31,11 @@ const nodeStates: Map<string, NodeHistory> = new Map();
 // --- Helia IPFS Node ---
 let helia: any; // Helia node instance
 
+let createHelia: any; // Dynamically import createHelia
+
 async function startHelia() {
+    // Dynamically import createHelia
+    ({ createHelia } = await import('helia'));
     helia = await createHelia();
     console.log(`✅ Helia IPFS node started with Peer ID: ${helia.libp2p.peerId.toString()}`);
 }
@@ -64,6 +68,7 @@ async function handlePinStateToIPFS(args: { vaultName: string; cid: string }) {
     }
 
     try {
+        // Dynamically import CID
         const cidInstance = CID.parse(cid);
         await helia.pins.add(cidInstance);
         console.log(`✅ Successfully pinned CID ${cid} for vault ${vaultName} to IPFS.`);

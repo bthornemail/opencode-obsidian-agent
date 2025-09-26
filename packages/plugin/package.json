@@ -5,7 +5,8 @@
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
-		        "build": "node esbuild.config.mjs production",		"version": "node version-bump.mjs && git add manifest.json versions.json"
+		"build": "node esbuild.config.mjs production",
+		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
 	"keywords": [],
 	"author": "",
@@ -24,6 +25,7 @@
 		"typescript": "4.7.4"
 	},
 	"dependencies": {
-		"@opencode-obsidian-workspace/core": "workspace:*"
+		"@opencode-obsidian-workspace/core": "workspace:*",
+		"eslint": "^9.36.0"
 	}
 }

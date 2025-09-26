@@ -1,11 +1,9 @@
 packages:
   - packages/*
 
-ignoredBuiltDependencies:
+onlyBuiltDependencies:
   - '@ipshipyard/node-datachannel'
   - esbuild
-
-onlyBuiltDependencies:
   - keccak
   - secp256k1
 
