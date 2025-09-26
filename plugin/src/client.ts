@@ -81,4 +81,17 @@ export class OpencodeAgentClient {
             this.sendCommand(command);
         });
     }
+
+    getHistoryProof(nodeId: string, timestamp: number): Promise<any> {
+        return new Promise((resolve) => {
+            const command: IToolCommand = {
+                id: uuidv4(),
+                commandName: 'GetHistoryProof',
+                arguments: { nodeId, timestamp },
+                timestamp: Date.now(),
+            };
+            this.pendingRequests.set(command.id, resolve);
+            this.sendCommand(command);
+        });
+    }
 }
