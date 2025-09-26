@@ -9,7 +9,16 @@ import { IToolCommand} from '../../core/dist/mcp-types';
 import { CID } from 'multiformats/cid' //https://www.npmjs.com/package/multiformats
 import * as json from 'multiformats/codecs/json'
 import { sha256 } from 'multiformats/hashes/sha2'
-// ... (Argument Parsing & Paths)
+
+// --- Argument Parsing & Paths ---
+const args = process.argv.slice(2);
+const vaultPath = args[0] || process.env.VAULT_PATH || path.join(process.cwd(), 'vaults', 'default');
+const notesPath = path.join(vaultPath, 'notes');
+const wsPort = parseInt(process.env.WS_PORT || '8080', 10);
+
+const wss = new WebSocketServer({ port: wsPort });
+
+console.log(`WebSocket server started on port ${wsPort}`);
 
 // --- In-memory State ---
 interface NodeHistory {
