@@ -11,10 +11,14 @@
             "id": "d031891ea60428b8",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "TETRAHEDRAL_BRAIN_REFERENCE.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "TETRAHEDRAL_BRAIN_REFERENCE"
             }
           }
         ]
@@ -163,5 +167,42 @@
     }
   },
   "active": "d031891ea60428b8",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "opencode-cli/package.json.1975047860",
+    "pnpm-lock.yaml.4143778101",
+    "_tmp_160888_20adda03cf52e41541137b6b4515108b",
+    "opencode-cli/package.json.1361501868",
+    "opencode-cli/node_modules/@types",
+    "opencode-cli/node_modules",
+    "pnpm-lock.yaml.694243413",
+    "_tmp_157377_ef4efb2441cb53f7755fda39d01ead2a",
+    "opencode-plugin/src/ui/ExecuteShellModal.ts",
+    "opencode-plugin/src/ui/CreateVaultModal.ts",
+    "opencode-plugin/src/ui",
+    "vaults/templates/base-agent-vault/README.md",
+    "opencode-plugin/README.md",
+    "opencode-plugin/node_modules/@opencode-ai/sdk/node_modules/@hey-api/openapi-ts/README.md",
+    "opencode-plugin/node_modules/@opencode-ai/sdk/node_modules/@hey-api/openapi-ts/LICENSE.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/unified-signatures.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/unbound-method.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/typedef.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/type-annotation-spacing.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/triple-slash-reference.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/switch-exhaustiveness-check.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/strict-boolean-expressions.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/space-infix-ops.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/space-before-function-paren.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/space-before-blocks.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/sort-type-union-intersection-members.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/semi.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/return-await.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/restrict-template-expressions.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/restrict-plus-operands.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/require-await.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/require-array-sort-compare.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/quotes.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/promise-function-async.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/prefer-ts-expect-error.md",
+    "opencode-plugin/node_modules/@typescript-eslint/eslint-plugin/docs/rules/prefer-string-starts-ends-with.md"
+  ]
 }

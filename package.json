@@ -1,24 +1,10 @@
 {
-  "name": "opencode-obsidian-agent-environment",
-  "version": "1.0.0",
-  "description": "Collaborative agent pipelines with OpenCode.ai and Obsidian.",
-  "main": "dist/server/index.js",
+  "name": "opencode-v5-monorepo",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm:dev:server\" \"npm:dev:plugin\"",
-    "dev:server": "ts-node src/server/index.ts",
-    "dev:plugin": "cd .obsidian/plugins/opencode-agent-plugin && npm run dev",
-    "build": "npm run build:server && npm run build:plugin",
-    "build:server": "esbuild src/server/index.ts src/client/index.ts --bundle --platform=node --outdir=dist",
-    "build:plugin": "cd .obsidian/plugins/opencode-agent-plugin && npm run build"
+    "dev": "pnpm --parallel --stream dev",
+    "build": "pnpm --parallel --stream build"
   },
-  "keywords": [
-    "opencode",
-    "obsidian",
-    "ai",
-    "agent"
-  ],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.11.6",
     "@types/ws": "^8.5.3",
@@ -28,10 +14,13 @@
     "typescript": "4.7.4"
   },
   "dependencies": {
-    "@opencode-ai/sdk": "latest",
-    "ws": "^8.13.0",
-    "merkle-patricia-tree": "^4.3.0",
-    "obsidian": "latest",
-    "ethers": "^5.7.2"
+    "@modelcontextprotocol/sdk": "^1.18.2",
+    "@opencode-ai/plugin": "^0.11.8",
+    "ethers": "^6.15.0",
+    "merkle-patricia-tree": "^4.2.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "uuid": "^13.0.0",
+    "ws": "^8.18.3"
   }
 }

@@ -1,0 +1,27 @@
+{
+  "name": "opencode-cli",
+  "version": "1.0.0",
+  "description": "DAI Server and Agentic Executor for the Opencode V5 Environment",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "multiformats": "^13.4.1",
+    "tinyneat": "^1.1.0",
+    "wink-eng-lite-web-model": "^1.8.1",
+    "wink-nlp": "^2.4.0",
+    "wordnet": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@types/ws": "^8.5.3",
+    "esbuild": "0.17.3",
+    "ts-node": "^10.9.1",
+    "typescript": "4.7.4"
+  }
+}

@@ -1,57 +1,52 @@
-# Project Directive: The Tetrahedral Shared Brain
+# Project Directive: V5 Agentic Core Refactor
 
-**Version:** 1.0
-**Status:** Ready for Development (Phase 4)
+**Version:** 5.0
+**Status:** Ready for Development (Milestone 1)
 
 ---
 
 ## 1. High-Level Objective
 
-Your primary task is to begin the implementation of **Phase 4: Agentic Automation**. This involves onboarding the first autonomous AI agent to the Tetrahedral Shared Brain network. The agent will leverage the existing infrastructure to interact with and verify nodes.
+The project's objective has evolved. The new primary task is to refactor the existing proof-of-concept into a production-grade, decentralized, and autonomous coding environment based on the **Opencode V5 Master Specification**.
 
-The complete architectural vision is detailed in the project's single source of truth:
+This involves a significant architectural shift to a dual-application model, introducing isolated agent environments, and standardizing all communication via the Model Context Protocol (MCP).
 
-**Primary Reference: `TETRAHEDRAL_BRAIN_REFERENCE.md`**
+## 2. Primary References
 
----
+All development must adhere to the architecture detailed in the following documents:
 
-## 2. Immediate Task: Implement the Verification Agent
+1.  **Master Specification**: The complete architectural blueprint is defined in the files located at `plan/opencode-master-specification/`.
+2.  **Core Concepts**: The fundamental principles of the Tetrahedral Node are documented in `TETRAHEDRAL_BRAIN_REFERENCE.md`.
 
-Your starting point is to create an agent that can autonomously monitor and verify the integrity of the network.
+## 3. Implementation Plan Summary
 
-### Task: Create the Verification Agent
-- **Location**: Create a new file for the agent, for example, at `.opencode/plugin/verification_agent.ts`.
-- **Requirements**:
-    1.  The agent should be implemented as an **Opencode Plugin**.
-    2.  On startup, the agent should use the `OpencodeAgentClient` to connect to the WebSocket server.
-    3.  The agent must listen for incoming `node_update` messages.
-    4.  Upon receiving a `node_update` message, the agent will **autonomously perform the verification process**:
-        a. Request the full graph state to get the `historyRoot` for the updated node.
-        b. Request the Merkle inclusion proof for the specific update from the server.
-        c. Use the `verifyProof` utility to validate the proof.
-        d. Log the result of the verification (e.g., "Agent verification successful for node [nodeId]" or "Agent verification FAILED for node [nodeId]").
+The refactoring will proceed through the following major milestones:
 
-This task will demonstrate the system's capacity for autonomous, trustless verification by an AI agent, a core goal of the project.
+*   **Milestone 1: Establish the Dual-Application Infrastructure**
+    *   Restructure the project to support `opencode-cli` (backend) and `opencode-plugin` (frontend) in a `pnpm` workspace. Establish the new `vaults/` directory.
 
----
+*   **Milestone 2: Implement the Model Context Protocol (MCP)**
+    *   Integrate the official MCP TypeScript SDK and refactor all network communication to use its standardized interfaces (`IToolCommand`, `IAgentVaultContext`).
 
-## 3. Key Files & Technologies
+*   **Milestone 3: Implement Agent Lifecycle and Tooling**
+    *   Build the logic for bootstrapping new agent vaults and securely executing sandboxed shell commands (like `pnpm install` and `docker run`).
 
-- **Primary Blueprint**: `TETRAHEDRAL_BRAIN_REFERENCE.md`
-- **Agent Location**: `.opencode/plugin/verification_agent.ts` (to be created)
-- **Client Logic**: `src/client/index.ts`
-- **Verification Logic**: `src/core/verification.ts`
-- **Key Libraries**:
-    - `@opencode-ai/plugin`: For the agent's plugin structure.
-    - `ethers`: For cryptographic operations.
+*   **Milestone 4: Integrate Advanced Capabilities (NLP & DOICL)**
+    *   Add the specified NLP libraries for context enrichment and implement the immutable history layer (DOICL) by generating and logging CIDs for completed work.
 
----
+## 4. Immediate Task
 
-## 4. Agent Instructions
+The immediate task is to begin **Milestone 1, Task 1.1: Project Restructuring**.
 
-1.  **Review the Opencode Plugin documentation** to structure your agent correctly.
-2.  **Utilize Existing Code**: Import and use the `OpencodeAgentClient` and `verifyProof` functions. Do not reimplement them.
-3.  **Focus on Automation**: The agent's primary role is to perform the verification workflow without human intervention.
-4.  **Provide Clear Logging**: The agent's output should clearly state which node it is verifying and what the outcome was.
+This involves:
+1.  Creating the new directories: `vaults/agents/`, `vaults/templates/base-agent-vault/`, and `opencode-cli/`.
+2.  Moving the existing plugin source code into a new root-level `opencode-plugin/` directory.
+3.  Reconfiguring the root `package.json` to define a `pnpm` workspace.
 
-You are now cleared to begin programming Phase 4.
+## 5. Agent Instructions
+
+1.  **Adhere to the Master Specification**: All implementation details must follow the architecture described in the `plan/opencode-master-specification/` documents.
+2.  **Follow the Milestones Sequentially**: Do not skip ahead. The successful completion of each milestone is foundational for the next.
+3.  **Begin with Restructuring**: Your first action is to execute the file and directory changes outlined in Task 1.1.
+
+You are now cleared to begin the V5 refactoring.
