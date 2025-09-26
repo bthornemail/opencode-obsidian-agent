@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "description": "Background agent runtime for a single vault",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node src/index.ts",
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:chokidar --external:wink-nlp --external:wink-eng-lite-web-model --external:wordnet --external:helia",
-    "start": "node dist/index.js"
+    "predev": "export OPENCODE_OBSIDIAN_RUNTIME_WS_PORT=8080",
+    "dev": "tsx src/index.ts",
+    "postdev": "fuser -k 8080/tcp",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --external:chokidar --external:wink-nlp --external:wink-eng-lite-web-model --external:wordnet",
+    "prestart": "export OPENCODE_OBSIDIAN_RUNTIME_WS_PORT=8080",
+    "start": "node dist/index.js",
+    "poststart": "fuser -k 8080/tcp"
   },
   "dependencies": {
     "@ipshipyard/node-datachannel": "^0.26.6",
     "@opencode-obsidian-workspace/core": "workspace:*",
     "chokidar": "^4.0.3",
+    "dotenv": "^17.2.2",
     "helia": "^5.5.1",
     "multiformats": "^11.0.2",
     "wink-eng-lite-web-model": "^1.8.1",

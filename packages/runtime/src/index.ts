@@ -7,6 +7,8 @@ import { BaseTrie as Trie } from 'merkle-patricia-tree';
 import { TetraNode} from '../../core/dist/TetraNode';
 import { IToolCommand} from '../../core/dist/mcp-types';
 import {CID} from 'multiformats';
+import dotenv from 'dotenv'; 
+dotenv.config();  // Load environment variables from .env file 
 // import * as json from 'multiformats/codecs/json'
 // import { sha256 } from 'multiformats/hashes/sha2'
 // import nodeDataChannel from 'node-datachannel';
@@ -15,7 +17,7 @@ import {CID} from 'multiformats';
 const args = process.argv.slice(2);
 const vaultPath = args[0] || process.env.VAULT_PATH || path.join(process.cwd(), 'vaults', 'default');
 const notesPath = path.join(vaultPath, 'notes');
-const wsPort = parseInt(process.env.WS_PORT || '8080', 10);
+const wsPort = parseInt(process.env.OPENCODE_OBSIDIAN_RUNTIME_WS_PORT || '8080', 10);
 
 const wss = new WebSocketServer({ port: wsPort });
 

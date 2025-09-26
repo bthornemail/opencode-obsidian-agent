@@ -11,7 +11,19 @@
   "scripts": {
     "dev": "pnpm --parallel --stream dev",
     "build": "pnpm --parallel --stream build",
-    "build-core": "pnpm install && pnpm --filter @opencode-obsidian-workspace/core build"
+    "start": "pnpm --parallel --stream start",
+    "build-core": "pnpm install && pnpm --filter @opencode-obsidian-workspace/core build",
+    "build:packages": "npm run build --workspaces --if-present",
+    "start:server": "npm run start --workspace=@opencode-obsidian-workspace/server",
+    "start:runtime": "npm run start --workspace=@opencode-obsidian-workspace/runtime",
+    "start:cli": "npm run start --workspace=@opencode-obsidian-workspace/cli",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present && rm -rf dist coverage .nyc_output",
+    "publish:all": "npm run build && npm publish --workspaces --access public",
+    "version:bump": "npm version patch --workspaces",
+    "precommit": "npm run lint && npm run test",
+    "release": "npm run clean && npm run build && npm run test && npm run publish:all"
   },
   "devDependencies": {
     "@types/node": "^16.18.126",

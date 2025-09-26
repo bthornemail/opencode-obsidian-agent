@@ -1,14 +1,17 @@
 {
-	"name": "@opencode-obsidian-workspace/server",
+  "name": "@opencode-obsidian-workspace/server",
   "version": "1.0.0",
   "description": "Global WebSocket Relay Server for Opencode V5+",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "pre:dev": "export OPENCODE_OBSIDIAN_SERVER_WSS_PORT=9090",
+    "dev": "tsx src/index.ts",
     "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js"
   },
   "dependencies": {
     "@opencode-obsidian-workspace/core": "workspace:*",
+    "dotenv": "^17.2.2",
     "ws": "^8.13.0"
   },
   "devDependencies": {

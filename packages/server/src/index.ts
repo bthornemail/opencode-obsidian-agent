@@ -1,8 +1,9 @@
 import { WebSocketServer, WebSocket } from 'ws';
+import dotenv from 'dotenv'; 
+dotenv.config();  // Load environment variables from .env file 
+const wss = new WebSocketServer({ port: process.env.OPENCODE_OBSIDIAN_SERVER_WSS_PORT ? parseInt(process.env.OPENCODE_OBSIDIAN_SERVER_WSS_PORT) : 8080 });
 
-const wss = new WebSocketServer({ port: 8080 });
-
-console.log('✅ Global Relay Server started on ws://localhost:8080');
+console.log(`✅ Global Relay Server started on ws://localhost:${wss.options.port}`);
 
 wss.on('connection', (ws, req) => {
     const clientId = req.headers['sec-websocket-key'];
