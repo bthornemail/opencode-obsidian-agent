@@ -11,7 +11,9 @@
   "scripts": {
     "dev": "pnpm --parallel --stream dev",
     "build": "pnpm --parallel --stream build",
+    "prepare": "export EDITOR='code --wait'",
     "start": "pnpm --parallel --stream start",
+    "opencode": "opencode --hostname=localhost --port=4000",
     "build-core": "pnpm install && pnpm --filter @opencode-obsidian-workspace/core build",
     "build:packages": "npm run build --workspaces --if-present",
     "start:server": "npm run start --workspace=@opencode-obsidian-workspace/server",
