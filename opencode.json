@@ -41,6 +41,103 @@
                     "name": "Qwen 3 8B"
                 }
             }
+        },
+        "openrouter": {
+            "models": {
+                "qwen/qwen3-235b-a22b:free": {
+                    "name": "Qwen 3 235B"
+                },
+                "qwen/qwen3-8b:free": {
+                    "name": "Qwen 3 8B"
+                },
+                "google/gemma-3n-e4b-it:free": {
+                    "name": "Gemma 3N E4B IT"
+                },
+                // 1. Qwen3 Coder is explicitly designed for agentic coding, tool use, and long-context.
+                "qwen/qwen3-coder:free": {
+                    "options": {
+                        "reasoningEffort": "high",
+                        "textVerbosity": "low",
+                        "reasoningSummary": "auto",
+                        "maxOutputTokens": 8192,
+                    }
+                },
+                // 2. DeepSeek-R1 for its exceptional reasoning and coding performance.
+                "deepseek/deepseek-r1:free": {
+                    "options": {
+                        "reasoningEffort": "high",
+                        "textVerbosity": "low",
+                        "thinking": {
+                            "type": "enabled",
+                            "budgetTokens": 10000,
+                        }
+                    }
+                },
+                // 3. Grok 4 Fast for a strong, fast, and free option that supports explicit reasoning.
+                "x-ai/grok-4-fast:free": {
+                    "options": {
+                        "reasoningEnabled": true,
+                        "textVerbosity": "minimal",
+                        "include": [
+                            "reasoning.trace"
+                        ],
+                    }
+                },
+                // 4. DeepSeek V3 Base as a strong, high-parameter alternative for coding tasks.
+                "deepseek/deepseek-v3-base:free": {
+                    "options": {
+                        "reasoningEffort": "medium",
+                        "textVerbosity": "low",
+                    }
+                },
+                // 5. Mistral-7B-Instruct for high speed and strong base instruction-following.
+                "mistralai/mistral-7b-instruct:free": {
+                    "options": {
+                        "reasoningEffort": "low", // Prioritize speed for quick planning steps
+                        "textVerbosity": "minimal",
+                    }
+                },
+                // 6. GLM 4.5 Air for its MoE architecture and explicit design for agentic applications.
+                "z-ai/glm-4.5-air:free": {
+                    "options": {
+                        "thinkingMode": "advanced",
+                        "textVerbosity": "low",
+                        "budgetTokens": 8192,
+                    }
+                },
+                // 7. Gemma 2-9B-IT as a reliable, highly-available open model for general agent tasks.
+                "google/gemma-2-9b-it:free": {
+                    "options": {
+                        "reasoningEffort": "medium",
+                        "textVerbosity": "low",
+                    }
+                },
+                // 8. DeepSeek R1 0528 (a strong iteration) for coding consistency.
+                "deepseek/deepseek-r1-0528:free": {
+                    "options": {
+                        "reasoningEffort": "high",
+                        "textVerbosity": "low",
+                        "include": [
+                            "reasoning.summary"
+                        ],
+                    }
+                },
+                // 9. Qwen 32B for a larger, general-purpose model suitable for complex planning.
+                "qwen/qwen3-32b:free": {
+                    "options": {
+                        "reasoningEffort": "medium",
+                        "textVerbosity": "low",
+                    }
+                },
+                // 10. Mistral Small 3.2 for a balanced model that performs well under instruction-tuned constraints.
+                "mistralai/mistral-small-3.2-24b-instruct:free": {
+                    "options": {
+                        "reasoningEffort": "medium",
+                        "textVerbosity": "low",
+                        "temperature": 0.1, // Lower temperature for more deterministic agent output
+                    }
+                }
+            }
         }
     },
     "mcp": {
@@ -108,7 +205,6 @@
         "build": {
             "mode": "primary",
             "model": "ollama/qwen3:8b",
-            "prompt": "{file:./prompts/build.txt}",
             "tools": {
                 "write": true,
                 "edit": true,
