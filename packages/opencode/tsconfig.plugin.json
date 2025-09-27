@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // "rootDir": "./plugins",
+    "outDir": "../../.opencode/plugin",
+    "lib": ["ESNext", "DOM","WebWorker"]
+  },
+  "include": [
+    "plugins/**/*.ts"
+  ],
+  "exclude": [
+    "dist/**/*.ts",
+    "src/**/*.ts",
+    "node_modules"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@opencode-obsidian-workspace/cli",
+  "name": "@opencode-obsidian-workspace/opencode",
   "version": "1.0.0",
   "description": "CLI for managing Opencode Agentic Vaults",
   "main": "dist/index.js",
@@ -7,13 +7,16 @@
     "opencode-vault": "./dist/index.js"
   },
   "scripts": {
-    "dev": "#tsx src/index.ts start",
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js && chmod +x dist/index.js"
+    "dev": "tsx src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js && chmod +x dist/index.js",
+    "build:plugins": "tsc --project tsconfig.plugin.json"
   },
   "dependencies": {
+    "@opencode-ai/plugin": "^0.11.8",
     "@opencode-ai/sdk": "^0.12.1",
     "@opencode-obsidian-workspace/core": "workspace:*",
-    "commander": "^14.0.1"
+    "install": "^0.13.0",
+    "npm": "^11.6.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.6",

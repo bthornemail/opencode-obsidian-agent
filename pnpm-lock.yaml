@@ -57,6 +57,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@opencode-ai/sdk':
+        specifier: ^0.12.1
+        version: 0.12.1(typescript@4.7.4)
       '@opencode-obsidian-workspace/core':
         specifier: workspace:*
         version: link:../core
@@ -92,6 +95,37 @@ importers:
         specifier: ^11.0.2
         version: 11.0.2
     devDependencies:
+      typescript:
+        specifier: 4.7.4
+        version: 4.7.4
+
+  packages/opencode:
+    dependencies:
+      '@opencode-ai/plugin':
+        specifier: ^0.11.8
+        version: 0.11.8(typescript@4.7.4)
+      '@opencode-ai/sdk':
+        specifier: ^0.12.1
+        version: 0.12.1(typescript@4.7.4)
+      '@opencode-obsidian-workspace/core':
+        specifier: workspace:*
+        version: link:../core
+      install:
+        specifier: ^0.13.0
+        version: 0.13.0
+      npm:
+        specifier: ^11.6.1
+        version: 11.6.1
+    devDependencies:
+      '@types/node':
+        specifier: ^16.11.6
+        version: 16.18.126
+      esbuild:
+        specifier: '>=0.25.0'
+        version: 0.25.10
+      ts-node:
+        specifier: ^10.9.1
+        version: 10.9.2(@types/node@16.18.126)(typescript@4.7.4)
       typescript:
         specifier: 4.7.4
         version: 4.7.4
@@ -1001,6 +1035,9 @@ packages:
 
   '@opencode-ai/sdk@0.11.8':
     resolution: {integrity: sha512-eY/chjTsozxZKNc+/2YW+HKWUcX9gOlSayqwu6GXCBvgCwqYi9RJXRRXiOxcvbeKYKBBQ5KKRWRshyj3ZNcTlw==}
+
+  '@opencode-ai/sdk@0.12.1':
+    resolution: {integrity: sha512-+BynyyfCpupTCs6vY3y7pV4UnIupYe5jepf0xPcdlHQA3rcMMUw7EHBW7+uN4Vl9DTKMrmZUd9x2dXCE6xV7kQ==}
 
   '@peculiar/asn1-cms@2.5.0':
     resolution: {integrity: sha512-p0SjJ3TuuleIvjPM4aYfvYw8Fk1Hn/zAVyPJZTtZ2eE9/MIer6/18ROxX6N/e6edVSfvuZBqhxAj3YgsmSjQ/A==}
@@ -2320,6 +2357,10 @@ packages:
   ini@1.3.8:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
 
+  install@0.13.0:
+    resolution: {integrity: sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA==}
+    engines: {node: '>= 0.10'}
+
   interface-blockstore@5.3.2:
     resolution: {integrity: sha512-oA9Pjkxun/JHAsZrYEyKX+EoPjLciTzidE7wipLc/3YoHDjzsnXRJzAzFJXNUvogtY4g7hIwxArx8+WKJs2RIg==}
 
@@ -2955,6 +2996,78 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
+
+  npm@11.6.1:
+    resolution: {integrity: sha512-7iDSHDoup6uMQJ37yWrhfqcbMhF0UEfGRap6Nv+aKQcrIJXlCi2cKbj75WBmiHlcwsQCy/U0zEwDZdAx6H/Vaw==}
+    engines: {node: ^20.17.0 || >=22.9.0}
+    hasBin: true
+    bundledDependencies:
+      - '@isaacs/string-locale-compare'
+      - '@npmcli/arborist'
+      - '@npmcli/config'
+      - '@npmcli/fs'
+      - '@npmcli/map-workspaces'
+      - '@npmcli/package-json'
+      - '@npmcli/promise-spawn'
+      - '@npmcli/redact'
+      - '@npmcli/run-script'
+      - '@sigstore/tuf'
+      - abbrev
+      - archy
+      - cacache
+      - chalk
+      - ci-info
+      - cli-columns
+      - fastest-levenshtein
+      - fs-minipass
+      - glob
+      - graceful-fs
+      - hosted-git-info
+      - ini
+      - init-package-json
+      - is-cidr
+      - json-parse-even-better-errors
+      - libnpmaccess
+      - libnpmdiff
+      - libnpmexec
+      - libnpmfund
+      - libnpmorg
+      - libnpmpack
+      - libnpmpublish
+      - libnpmsearch
+      - libnpmteam
+      - libnpmversion
+      - make-fetch-happen
+      - minimatch
+      - minipass
+      - minipass-pipeline
+      - ms
+      - node-gyp
+      - nopt
+      - normalize-package-data
+      - npm-audit-report
+      - npm-install-checks
+      - npm-package-arg
+      - npm-pick-manifest
+      - npm-profile
+      - npm-registry-fetch
+      - npm-user-validate
+      - p-map
+      - pacote
+      - parse-conflict-json
+      - proc-log
+      - qrcode-terminal
+      - read
+      - semver
+      - spdx-expression-parse
+      - ssri
+      - supports-color
+      - tar
+      - text-table
+      - tiny-relative-date
+      - treeverse
+      - validate-npm-package-name
+      - which
 
   nullthrows@1.1.1:
     resolution: {integrity: sha512-2vPPEi+Z7WqML2jZYddDIfy5Dqb0r2fze2zTxNNknZaFpVHU3mFB3R+DWeJWGVx0ecvttSGlJTI+WG+8Z4cDWw==}
@@ -4652,6 +4765,21 @@ snapshots:
       js-yaml: 4.1.0
       lodash: 4.17.21
 
+  '@hey-api/openapi-ts@0.81.0(typescript@4.7.4)':
+    dependencies:
+      '@hey-api/json-schema-ref-parser': 1.0.6
+      ansi-colors: 4.1.3
+      c12: 2.0.1
+      color-support: 1.1.3
+      commander: 13.0.0
+      handlebars: 4.7.8
+      js-yaml: 4.1.0
+      open: 10.1.2
+      semver: 7.7.2
+      typescript: 4.7.4
+    transitivePeerDependencies:
+      - magicast
+
   '@hey-api/openapi-ts@0.81.0(typescript@5.9.2)':
     dependencies:
       '@hey-api/json-schema-ref-parser': 1.0.6
@@ -5365,6 +5493,14 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
 
+  '@opencode-ai/plugin@0.11.8(typescript@4.7.4)':
+    dependencies:
+      '@opencode-ai/sdk': 0.11.8(typescript@4.7.4)
+      zod: 4.1.8
+    transitivePeerDependencies:
+      - magicast
+      - typescript
+
   '@opencode-ai/plugin@0.11.8(typescript@5.9.2)':
     dependencies:
       '@opencode-ai/sdk': 0.11.8(typescript@5.9.2)
@@ -5373,9 +5509,23 @@ snapshots:
       - magicast
       - typescript
 
+  '@opencode-ai/sdk@0.11.8(typescript@4.7.4)':
+    dependencies:
+      '@hey-api/openapi-ts': 0.81.0(typescript@4.7.4)
+    transitivePeerDependencies:
+      - magicast
+      - typescript
+
   '@opencode-ai/sdk@0.11.8(typescript@5.9.2)':
     dependencies:
       '@hey-api/openapi-ts': 0.81.0(typescript@5.9.2)
+    transitivePeerDependencies:
+      - magicast
+      - typescript
+
+  '@opencode-ai/sdk@0.12.1(typescript@4.7.4)':
+    dependencies:
+      '@hey-api/openapi-ts': 0.81.0(typescript@4.7.4)
     transitivePeerDependencies:
       - magicast
       - typescript
@@ -7013,6 +7163,8 @@ snapshots:
 
   ini@1.3.8: {}
 
+  install@0.13.0: {}
+
   interface-blockstore@5.3.2:
     dependencies:
       interface-store: 6.0.3
@@ -7803,6 +7955,8 @@ snapshots:
   node-releases@2.0.21: {}
 
   normalize-path@3.0.0: {}
+
+  npm@11.6.1: {}
 
   nullthrows@1.1.1: {}
 
