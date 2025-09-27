@@ -1,0 +1,145 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "theme": "dark",
+    "command": {
+        "greet": {
+            "template": "echo Hello, {{name}}!",
+            "description": "Greets a user",
+            "agent": "general",
+            "model": "openai/gpt-4",
+            "subtask": false
+        }
+    },
+    "watcher": {
+        "ignore": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build",
+            "coverage",
+            "*.db",
+            "*.rdb",
+            "# Logs",
+            "logs",
+            "*.log"
+        ]
+    },
+    "model": "deepseek-r1:8b",
+    "small_model": "gemma3:270m",
+    "username": "bthornemail",
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Ollama (local)",
+            "options": {
+                "baseURL": "http://localhost:11434/v1"
+            },
+            "models": {
+                "deepseek-r1:8b": {
+                    "name": "DeepSeek R1 8B"
+                },
+                "gemma3:270m": {
+                    "name": "Gemma 3 270M"
+                }
+            }
+        }
+    },
+    "mcp": {
+        "firt": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-firt@latest"],
+            "enabled": true,
+            "environment": {},
+        },
+        "sequentialthinking": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking@latest"],
+            "enabled": true
+        },
+        "redis": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-redis"],
+            "environment": {
+                "REDIS_URL": "redis://127.0.0.1:6379"
+            },
+            "enabled": true
+        },
+        "claude": {
+            "type": "local",
+            "command": ["claude", "mcp", "serve"],
+            "environment": {},
+            "enabled": true
+        },
+        "ollama": {
+            "type": "local",
+            "command": ["npx", "-y", "ollama-mcp-server@latest"],
+            "environment": {
+                "OLLAMA_BASE_URL": "http://localhost:11434"
+            },
+            "enabled": true
+        },
+        "wiki-vector-mcp": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/wiki-vector-mcp.js"],
+            "enabled": true
+        },
+        "axiom-canvas-mcp": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/axiom-canvas-mcp.js"],
+            "enabled": true
+        },
+        "obsidian-mcp": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/obsidian-mcp.js"],
+            "enabled": true
+        },
+        "identity-mcp": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/identity-mcp.js"],
+            "enabled": true
+        },
+        "logos-client": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/archive/universal-life-schema/production/logos-client/dist/logos-client.js"],
+            "environment": {
+                "LOGOS_API_URL": "http://127.0.0.1:3000",
+                "LOGOS_CREATOR_ID": "logos-client"
+            },
+            "enabled": true
+        },
+        "logos-server": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/archive/universal-life-schema/production/logos-client/dist/logos-server.js"],
+            "environment": {
+                "LOGOS_API_URL": "http://127.0.0.1:3000",
+                "LOGOS_CREATOR_ID": "logos-server"
+            },
+            "enabled": true
+        },
+        "opencode-server": {
+            "type": "remote",
+            "url": "ws://localhost:4096",
+            "enabled": true,
+            "headers": {}
+        },
+        "opencode-client": {
+            "type": "remote",
+            "url": "ws://localhost:4096",
+            "enabled": true,
+            "headers": {}
+        },
+        "obsidian-client": {
+            "type": "remote",
+            "url": "http://127.0.0.1:9090",
+            "enabled": true,
+            "headers": {}
+        },
+        "agent-runtime": {
+            "type": "remote",
+            "url": "ws://localhost:8080",
+            "enabled": true,
+            "headers": {}
+        }
+    },
+    "layout": "auto"
+}
