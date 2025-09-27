@@ -1,4 +1,5 @@
-import type { Plugin, tool } from "@opencode-ai/plugin"
+import type { Plugin } from "@opencode-ai/plugin"
+import { tool } from "@opencode-ai/plugin"
 
 
 // The tool helper creates a custom tool that opencode can call. It takes a Zod schema function and returns a tool definition with:
@@ -16,7 +17,7 @@ export const CustomToolsPlugin: Plugin = async (ctx) => {
         args: {
           foo: tool.schema.string(),
         },
-        async execute(args, ctx) {
+        async execute(args: any, ctx: any) {
           return `Hello ${args.foo}!`
         },
       }),

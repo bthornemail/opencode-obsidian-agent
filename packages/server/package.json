@@ -5,11 +5,16 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "pre:dev": "export OPENCODE_OBSIDIAN_SERVER_WSS_PORT=9090",
-    "dev": "tsx src/index.ts",
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js"
+    "dev:server": "tsx src/index.ts",
+    "dev:plugin": "tsc -watch --project tsconfig.plugin.json",
+    "dev": "concurrently --names \"opencode-server,opencode-plugin\" --color \"blue,green\" \"npm run dev:server\" \"npm run dev:plugin\"",
+    "build:server": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "build:plugin": "tsc --project tsconfig.plugin.json",
+    "build": "npm run build:server && npm run build:plugin"
   },
   "dependencies": {
+    "@opencode-ai/plugin": "^0.11.8",
+    "@opencode-ai/sdk": "^0.12.1",
     "@opencode-obsidian-workspace/core": "workspace:*",
     "dotenv": "^17.2.2",
     "ws": "^8.13.0"

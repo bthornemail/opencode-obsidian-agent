@@ -1,8 +1,14 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "module": "nodenext",
+    "target": "esnext",
+    "moduleResolution": "nodenext",
     "outDir": "./dist",
     "rootDir": "./src",
+    "lib": [
+      "ES2020"
+    ],
   },
   "include": [
     "src/**/*.ts"

@@ -2,8 +2,9 @@
 
 import { Command } from 'commander';
 import { promises as fs } from 'fs';
-import * as path from 'path';
 import { spawn } from 'child_process';
+import { createOpencodeClient } from "@opencode-ai/sdk";
+import path from 'node:path';
 
 const program = new Command();
 
@@ -107,6 +108,25 @@ program
             console.log(`✅ Agent runtime for "${vaultName}" started successfully.`);
             console.log(`   PID: ${runtimeProcess.pid} (saved to ${runtimePidPath})`);
             console.log(`   Logs are being written to ${runtimeLogPath}`);
+        }
+    });
+
+program
+    .command('connect')
+    .description('Connect to the Opencode server')
+    .option('-b, --base-url <url>', 'Base URL of the Opencode server', 'http://localhost:4096')
+    .action(async (options) => {
+        try {
+            const client = createOpencodeClient({
+                baseUrl: options.baseUrl,
+                responseStyle: "data",
+            });
+            // You can now use the client to interact with the Opencode server
+            console.log(`✅ Successfully connected to Opencode server at ${options.baseUrl}`);
+            // Example: const project = await client.project.get();
+            // console.log("Project:", project);
+        } catch (error: any) {
+            console.error(`❌ Failed to connect to Opencode server: ${error.message}`);
         }
     });
 

@@ -1,7 +1,7 @@
 import { Plugin, tool } from "@opencode-ai/plugin";
-import { OpencodeAgentClient } from "../../src/client";
-import { TetraNode } from "../../src/core/TetraNode";
-import { NodeUpdateMessage } from "../../src/core/types";
+import { TetraNode } from "../../core/dist/TetraNode.js";
+import { OpencodeAgentClient } from "../../plugin/dist/src/client.js";
+import { NodeUpdateMessage } from "../../core/dist/types.js";
 
 export const RefactoringAgent: Plugin = async (ctx) => {
     console.log("[RefactoringAgent] Initializing...");
