@@ -24,9 +24,8 @@
             "*.log"
         ]
     },
-    "model": "deepseek-r1:8b",
-    "small_model": "gemma3:270m",
     "username": "bthornemail",
+    "model": "ollama/qwen3:8b",
     "provider": {
         "ollama": {
             "npm": "@ai-sdk/openai-compatible",
@@ -38,107 +37,102 @@
                 "deepseek-r1:8b": {
                     "name": "DeepSeek R1 8B"
                 },
-                "gemma3:270m": {
-                    "name": "Gemma 3 270M"
+                "qwen3:8b": {
+                    "name": "Qwen 3 8B"
                 }
             }
         }
     },
     "mcp": {
-        "firt": {
-            "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-firt@latest"],
-            "enabled": true,
-            "environment": {},
-        },
         "sequentialthinking": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking@latest"],
-            "enabled": true
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking@latest"
+            ],
+            "enabled": false
         },
         "redis": {
             "type": "local",
-            "command": ["npx", "-y", "@modelcontextprotocol/server-redis"],
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-redis"
+            ],
             "environment": {
                 "REDIS_URL": "redis://127.0.0.1:6379"
             },
-            "enabled": true
+            "enabled": false
         },
         "claude": {
             "type": "local",
-            "command": ["claude", "mcp", "serve"],
+            "command": [
+                "claude",
+                "mcp",
+                "serve"
+            ],
             "environment": {},
-            "enabled": true
+            "enabled": false
         },
         "ollama": {
             "type": "local",
-            "command": ["npx", "-y", "ollama-mcp-server@latest"],
+            "command": [
+                "npx",
+                "-y",
+                "ollama-mcp-server@latest"
+            ],
             "environment": {
                 "OLLAMA_BASE_URL": "http://localhost:11434"
             },
-            "enabled": true
-        },
-        "wiki-vector-mcp": {
-            "type": "local",
-            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/wiki-vector-mcp.js"],
-            "enabled": true
-        },
-        "axiom-canvas-mcp": {
-            "type": "local",
-            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/axiom-canvas-mcp.js"],
-            "enabled": true
+            "enabled": false
         },
         "obsidian-mcp": {
             "type": "local",
-            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/obsidian-mcp.js"],
-            "enabled": true
+            "command": [
+                "node",
+                "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/obsidian-mcp.js"
+            ],
+            "enabled": false
         },
         "identity-mcp": {
             "type": "local",
-            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/identity-mcp.js"],
-            "enabled": true
+            "command": [
+                "node",
+                "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/identity-mcp.js"
+            ],
+            "enabled": false
+        }
+    },
+    "agent": {
+        "build": {
+            "mode": "primary",
+            "model": "ollama/qwen3:8b",
+            "prompt": "{file:./prompts/build.txt}",
+            "tools": {
+                "write": true,
+                "edit": true,
+                "bash": true
+            }
         },
-        "logos-client": {
-            "type": "local",
-            "command": ["node", "/home/main/devops/archive/universal-life-schema/production/logos-client/dist/logos-client.js"],
-            "environment": {
-                "LOGOS_API_URL": "http://127.0.0.1:3000",
-                "LOGOS_CREATOR_ID": "logos-client"
-            },
-            "enabled": true
+        "plan": {
+            "mode": "primary",
+            "model": "ollama/qwen3:8b",
+            "tools": {
+                "write": false,
+                "edit": false,
+                "bash": false
+            }
         },
-        "logos-server": {
-            "type": "local",
-            "command": ["node", "/home/main/devops/archive/universal-life-schema/production/logos-client/dist/logos-server.js"],
-            "environment": {
-                "LOGOS_API_URL": "http://127.0.0.1:3000",
-                "LOGOS_CREATOR_ID": "logos-server"
-            },
-            "enabled": true
-        },
-        "opencode-server": {
-            "type": "remote",
-            "url": "ws://localhost:4096",
-            "enabled": true,
-            "headers": {}
-        },
-        "opencode-client": {
-            "type": "remote",
-            "url": "ws://localhost:4096",
-            "enabled": true,
-            "headers": {}
-        },
-        "obsidian-client": {
-            "type": "remote",
-            "url": "http://127.0.0.1:9090",
-            "enabled": true,
-            "headers": {}
-        },
-        "agent-runtime": {
-            "type": "remote",
-            "url": "ws://localhost:8080",
-            "enabled": true,
-            "headers": {}
+        "chat": {
+            "description": "Engages in a chat with the user",
+            "mode": "subagent",
+            "model": "anthropic/claude-sonnet-4-20250514",
+            "prompt": "You are a chat assistant. Focus on providing helpful and engaging responses.",
+            "tools": {
+                "write": false,
+                "edit": false
+            }
         }
     },
     "layout": "auto"

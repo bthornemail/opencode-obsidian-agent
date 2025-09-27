@@ -40,8 +40,8 @@ dotenv.config();  // Load environment variables from .env file
                     ".DS_Store"
                 ],
             },
-            model: "deepseek-r1:8b",
-            small_model: "gemma3:270m",
+            model: "ollama/qwen3:8b",
+            small_model: "ollama/deepseek-r1:8b",
             provider: {
                 "ollama": {
                     "npm": "@ai-sdk/openai-compatible",
@@ -53,8 +53,8 @@ dotenv.config();  // Load environment variables from .env file
                         "deepseek-r1:8b": {
                             "name": "DeepSeek R1 8B"
                         },
-                        "gemma3:270m": {
-                            "name": "Gemma 3 270M"
+                        "qwen3:8b": {
+                            "name": "Qwen 3 8B"
                         }
                     }
                 }

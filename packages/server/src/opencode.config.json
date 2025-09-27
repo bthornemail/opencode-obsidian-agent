@@ -81,8 +81,8 @@
     "disabled_providers": [
         "anthropic"
     ],
-    "model": "deepseek-r1:8b",
-    "small_model": "gemma3:270m",
+    "model": "ollama/deepseek-r1:8b",
+    "small_model": "ollama/qwen3:1.7b",
     "username": "brian",
     "mode": {
         "build": {
@@ -114,8 +114,8 @@
                 "deepseek-r1:8b": {
                     "name": "DeepSeek R1 8B"
                 },
-                "gemma3:270m": {
-                    "name": "Gemma 3 270M"
+                "qwen3:1.7b": {
+                    "name": "Qwen 3 1.7B"
                 }
             }
         }

@@ -1,0 +1,87 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "theme": "dark",
+    "command": {
+        "greet": {
+            "template": "echo Hello, {{name}}!",
+            "description": "Greets a user",
+            "agent": "general",
+            "model": "openai/gpt-4",
+            "subtask": false
+        }
+    },
+    "watcher": {
+        "ignore": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build",
+            "coverage",
+            "*.db",
+            "*.rdb",
+            "# Logs",
+            "logs",
+            "*.log"
+        ]
+    },
+    "model": "deepseek-r1:8b",
+    "small_model": "gemma3:270m",
+    "username": "bthornemail",
+    "provider": {
+        "ollama": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Ollama (local)",
+            "options": {
+                "baseURL": "http://localhost:11434/v1"
+            },
+            "models": {
+                "deepseek-r1:8b": {
+                    "name": "DeepSeek R1 8B"
+                },
+                "qwen3:1.7b": {
+                    "name": "Qwen 3 1.7B"
+                }
+            }
+        }
+    },
+    "mcp": {
+        "sequentialthinking": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking@latest"],
+            "enabled": true
+        },
+        "redis": {
+            "type": "local",
+            "command": ["npx", "-y", "@modelcontextprotocol/server-redis"],
+            "environment": {
+                "REDIS_URL": "redis://127.0.0.1:6379"
+            },
+            "enabled": true
+        },
+        "claude": {
+            "type": "local",
+            "command": ["claude", "mcp", "serve"],
+            "environment": {},
+            "enabled": true
+        },
+        "ollama": {
+            "type": "local",
+            "command": ["npx", "-y", "ollama-mcp-server@latest"],
+            "environment": {
+                "OLLAMA_BASE_URL": "http://localhost:11434"
+            },
+            "enabled": true
+        },
+        "obsidian-mcp": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/obsidian-mcp.js"],
+            "enabled": true
+        },
+        "identity-mcp": {
+            "type": "local",
+            "command": ["node", "/home/main/devops/universal-life-protocol/packages/universal-life-vault/dist/identity-mcp.js"],
+            "enabled": true
+        }
+    },
+    "layout": "auto"
+}
