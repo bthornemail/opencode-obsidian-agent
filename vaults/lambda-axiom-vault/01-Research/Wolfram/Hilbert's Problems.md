@@ -1,0 +1,53 @@
+# Hilbert's Problems
+
+---
+
+Hilbert's problems are a set of (originally) unsolved problems in mathematics proposed by Hilbert. Of the 23 total appearing in the printed address, ten were actually presented at the Second International Congress in Paris on August 8, 1900. In particular, the problems presented by Hilbert were 1, 2, 6, 7, 8, 13, 16, 19, 21, and 22 (Derbyshire 2004, p. 377). Furthermore, the final list of 23 problems omitted one additional problem on [proof theory](https://mathworld.wolfram.com/ProofTheory.html) (Thiele 2001).
+
+Hilbert's problems were designed to serve as examples for the kinds of problems whose solutions would lead to the furthering of disciplines in mathematics. As such, some were areas for investigation and therefore not strictly "problems."
+
+1. "Cantor's problem of the cardinal number of the continuum." The question of if there is a transfinite number between that of a [denumerable set](https://mathworld.wolfram.com/DenumerableSet.html) and the numbers of the [continuum](https://mathworld.wolfram.com/Continuum.html) was answered by Gödel and Cohen in their solution to the [continuum hypothesis](https://mathworld.wolfram.com/ContinuumHypothesis.html) to the effect that the answer depends on the particular version of [set theory](https://mathworld.wolfram.com/SetTheory.html) assumed. The question of if the [continuum](https://mathworld.wolfram.com/Continuum.html) of numbers be considered a [well ordered set](https://mathworld.wolfram.com/WellOrderedSet.html) is related to Zermelo's [axiom of choice](https://mathworld.wolfram.com/AxiomofChoice.html). In 1963, the [axiom of choice](https://mathworld.wolfram.com/AxiomofChoice.html) was demonstrated to be independent of all other [axioms](https://mathworld.wolfram.com/Axiom.html) in [set theory](https://mathworld.wolfram.com/SetTheory.html). There is universal consensus on whether these results give a solution to this problem.
+
+2. "The compatibility of the arithmetical axioms." [Gödel's second incompleteness theorem](https://mathworld.wolfram.com/GoedelsSecondIncompletenessTheorem.html) indicated that it is cannot be proven that the [axioms](https://mathworld.wolfram.com/Axiom.html) of logic are consistent in the sense that any formal system interesting enough to formulate its own consistency can prove its own consistency [iff](https://mathworld.wolfram.com/Iff.html) it is inconsistent. There is no consensus if the results of Gödel and Gentzen provide a solution.
+
+3. Give two [tetrahedra](https://mathworld.wolfram.com/Tetrahedron.html) that cannot be decomposed into congruent [tetrahedra](https://mathworld.wolfram.com/Tetrahedron.html) directly or by adjoining congruent [tetrahedra](https://mathworld.wolfram.com/Tetrahedron.html). Dehn (1900, 1902) showed that a regular tetrahedron cannot be decomposed into a finite number of congruent tetrahedra (directly or by joining congruent tetrahedra) which can be reassembled to make a cube. It follows immediately form this result that two tetrahedra cannot be decomposed, as Hilbert proposed.
+
+4. Find [geometries](https://mathworld.wolfram.com/Geometry.html) whose [axioms](https://mathworld.wolfram.com/Axiom.html) are closest to those of [Euclidean geometry](https://mathworld.wolfram.com/EuclideanGeometry.html) if the [ordering](https://mathworld.wolfram.com/OrderingAxioms.html) and [incidence axioms](https://mathworld.wolfram.com/IncidenceAxioms.html) are retained, the [congruence axioms](https://mathworld.wolfram.com/CongruenceAxioms.html) weakened, and the equivalent of the [parallel postulate](https://mathworld.wolfram.com/ParallelPostulate.html) omitted. This problem was solved by G. Hamel.
+
+5. Can the assumption of differentiability for functions defining a continuous transformation [group](https://mathworld.wolfram.com/Group.html) be avoided? (This is a generalization of the [Cauchy functional equation](https://mathworld.wolfram.com/CauchyFunctionalEquation.html).) Solved by John von Neumann in 1930 for bicompact groups. Also solved for the [Abelian](https://mathworld.wolfram.com/AbelianGroup.html) case, and for the solvable case in 1952 with complementary results by Montgomery and Zippin (subsequently combined by Yamabe in 1953). Andrew Gleason showed in 1952 that the answer is also "yes" for all locally bicompact groups.
+
+6. Can physics be axiomatized?
+
+7. Let ![alpha!=1!=0](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline1.svg) be [algebraic](https://mathworld.wolfram.com/AlgebraicNumber.html) and ![beta](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline2.svg) [irrational](https://mathworld.wolfram.com/IrrationalNumber.html). Is ![alpha^beta](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline3.svg) then [transcendental](https://mathworld.wolfram.com/TranscendentalNumber.html)? In particular, are the [Gelfond-Schneider constant](https://mathworld.wolfram.com/Gelfond-SchneiderConstant.html) ![2^(sqrt(2))](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline4.svg) and [Gelfond's constant](https://mathworld.wolfram.com/GelfondsConstant.html) ![e^pi](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline5.svg) transcendental (Wells 1986, p. 45)? ![alpha^beta](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline6.svg) is known to be transcendental for the special case of ![beta](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline7.svg) an irrational [algebraic number](https://mathworld.wolfram.com/AlgebraicNumber.html), as proved in 1934 by Aleksander Gelfond in a result now known as [Gelfond's theorem](https://mathworld.wolfram.com/GelfondsTheorem.html) (Courant and Robins 1996). However, the case of nonalgebraic irrational ![beta](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline8.svg) has not been resolved, with solutions known only for degenerate constructions such as ![alpha=2](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline9.svg), ![beta=ln3/ln2](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline10.svg).
+
+8. Prove the [Riemann hypothesis](https://mathworld.wolfram.com/RiemannHypothesis.html). The [conjecture](https://mathworld.wolfram.com/Conjecture.html) has still been neither proved nor disproved.
+
+9. Construct generalizations of the [reciprocity theorem](https://mathworld.wolfram.com/ReciprocityTheorem.html) of [number theory](https://mathworld.wolfram.com/NumberTheory.html).
+
+10. Does there exist a universal algorithm for solving [Diophantine equations](https://mathworld.wolfram.com/DiophantineEquation.html)? The impossibility of obtaining a general solution was proven by Yuri Matiyasevich in 1970 (Matiyasevich 1970, Davis 1973, Davis and Hersh 1973, Davis 1982, Matiyasevich 1993) by showing that the relation ![n=F_(2m)](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline11.svg) (where ![F_(2m)](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline12.svg) is the ![(2m)](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline13.svg)th [Fibonacci number](https://mathworld.wolfram.com/FibonacciNumber.html)) is Diophantine. More specifically, Matiyasevich showed that there is a polynomial ![P](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline14.svg) in ![n](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline15.svg), ![m](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline16.svg), and a number of other variables ![x](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline17.svg), ![y](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline18.svg), ![z](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline19.svg), ... having the property that ![n=F_(2m)](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline20.svg) [iff](https://mathworld.wolfram.com/Iff.html) there exist integers ![x](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline21.svg), ![y](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline22.svg), ![z](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline23.svg), ... such that ![P(n,m,x,y,z,...)=0](https://mathworld.wolfram.com/images/equations/HilbertsProblems/Inline24.svg).
+
+11. Extend the results obtained for quadratic fields to arbitrary [integer](https://mathworld.wolfram.com/Integer.html) algebraic fields.
+
+12. Extend a theorem of Kronecker to arbitrary algebraic fields by explicitly constructing Hilbert class fields using special values. This calls for the construction of [holomorphic functions](https://mathworld.wolfram.com/HolomorphicFunction.html) in several variables which have properties analogous to the exponential function and elliptic modular functions (Holzapfel 1995).
+
+13. Show the impossibility of solving the general seventh degree equation by functions of two variables.
+
+14. Show the finiteness of systems of relatively integral functions.
+
+15. Justify Schubert's [enumerative geometry](https://mathworld.wolfram.com/EnumerativeGeometry.html) (Bell 1945).
+
+16. Study the topology of real [algebraic curves](https://mathworld.wolfram.com/AlgebraicCurve.html) and [surfaces](https://mathworld.wolfram.com/AlgebraicSurface.html). See Gudkov and Utkin (1978), Ilyashenko and Yakovenko (1995), and Smale (2000) for additional details.
+
+17. Find a representation of definite form by [squares](https://mathworld.wolfram.com/SquareNumber.html).
+
+18. Build spaces with congruent [polyhedra](https://mathworld.wolfram.com/Polyhedron.html).
+
+19. Analyze the analytic character of solutions to variational problems.
+
+20. Solve general [boundary value problems](https://mathworld.wolfram.com/BoundaryValueProblem.html).
+
+21. Solve differential equations given a [monodromy group](https://mathworld.wolfram.com/MonodromyGroup.html). More technically, prove that there always exists a [Fuchsian system](https://mathworld.wolfram.com/FuchsianSystem.html) with given singularities and a given [monodromy group](https://mathworld.wolfram.com/MonodromyGroup.html). Several special cases had been solved, but a [negative](https://mathworld.wolfram.com/Negative.html) solution was found in 1989 by B. Bolibruch (Anasov and Bolibruch 1994).
+
+22. Uniformization.
+
+23. Extend the methods of [calculus of variations](https://mathworld.wolfram.com/CalculusofVariations.html).

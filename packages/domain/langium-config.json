@@ -1,0 +1,32 @@
+{
+    "projectName": "Domain",
+    "languages": [
+        {
+            "id": "arithmetics",
+            "grammar": "src/language-server/arithmetics.langium",
+            "fileExtensions": [".calc"],
+            "caseInsensitive": true
+        },
+        {
+            "id": "domain-model",
+            "grammar": "src/language-server/domain-model.langium",
+            "fileExtensions": [".dmodel"]
+        },
+        {
+            "id": "requirements-lang",
+            "grammar": "src/language-server/requirements.langium",
+            "fileExtensions": [".req"]
+        },
+        {
+            "id": "tests-lang",
+            "grammar": "src/language-server/tests.langium",
+            "fileExtensions": [".tst"]
+        },
+        {
+            "id": "statemachine",
+            "grammar": "src/language-server/statemachine.langium",
+            "fileExtensions": [".statemachine"]
+        }
+    ],
+    "out": "src/language-server/generated"
+}

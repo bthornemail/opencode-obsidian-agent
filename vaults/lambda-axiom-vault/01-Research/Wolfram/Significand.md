@@ -1,0 +1,3 @@
+In floating-point arithmetic, the significand is a component of a finite floating-point number containing its significant digits.
+
+Generally speaking, the significand can be thought of as an integer, as a fraction, or as some other fixed-point form by choosing an appropriate exponent offset (that is, an appropriate bias. What's more, a decimal or subnormal binary significand may also contain leading zeros.
