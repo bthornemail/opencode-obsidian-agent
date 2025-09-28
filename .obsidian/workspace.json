@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/Axioms/Snake Lemma.md",
+                "file": "vaults/lambda-axiom-vault/01-Research/Wolfram/Hypergeometric Differential EquationHypergeometric Differential Equation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Snake Lemma"
+              "title": "Hypergeometric Differential EquationHypergeometric Differential Equation"
             }
           }
         ],
@@ -109,7 +109,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/Axioms/Snake Lemma.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Snake Lemma"
+              "title": "Backlinks"
             }
           },
           {
@@ -168,7 +167,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 332.5
+    "width": 332.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -181,43 +181,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "69fdd5f415c79fe3",
+  "active": "1476319502263cc9",
   "lastOpenFiles": [
-    "docs/Zero Module/Injective Module.md",
-    "docs/Zero Module/Homological Algebra.md",
-    "docs/Zero Module/Module.md",
-    "docs/Zero Module/R-Module.md",
-    "docs/Zero Module/Zero Module.md",
-    "docs/Zero Module",
-    "docs/Modular Systems & Bases",
-    "docs/Axioms/Commutative Diagram.md",
-    "docs/Axioms/Snake Lemma.md",
-    "docs/Axioms/Diagram Chasing.md",
-    "docs/Axioms/Untitled",
-    "docs/Axioms/Injective Module.md",
-    "docs/Chain Complex/Artinian Module.md",
-    "docs/Axioms/Projective Module.md",
-    "docs/Chain Complex/Untitled 1.md",
-    "docs/Axioms/Module.md",
-    "docs/Axioms/Module Homomorphism.md",
-    "docs/Axioms/Sigma-Algebra.md",
-    "docs/Axioms/Ergodic Measure.md",
-    "docs/Axioms/Endomorphism.md",
-    "docs/Axioms/Quotient Vector Space.md",
-    "docs/Axioms/Ring of Integers.md",
-    "docs/Chain Complex/Endomorphism Ring.md",
-    "docs/Axioms/Integral Domain.md",
-    "docs/Chain Complex/Ring.md",
-    "docs/Chain Complex/Abstract Vector Space.md",
-    "docs/Chain Complex/Untitled.md",
-    "docs/Axioms/Zermelo-Fraenkel Axioms.md",
-    "docs/Chain Complex/Transcendence Degree.md",
-    "docs/Axioms",
-    "docs/Chain Complex",
-    "packages/plugin/1758930052041-package.json",
-    "packages/plugin/1758930049891-package.json",
-    "packages/plugin/1758930045901-package.json",
-    "packages/plugin/1758930038713-package.json",
-    "packages/plugin/1758930034641-package.json"
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/Hypergeometric Function.md",
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/Hypergeometric Differential EquationHypergeometric Differential Equation.md",
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/Hilbert's Problems.md",
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/Chain Complex.md",
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/Chain Homomorphism.md",
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/!Pseudoperfect Number.md",
+    "Clippings/!Jacobi Polynomial -- from Wolfram MathWorld.md",
+    "Clippings/Jacobi Polynomial -- from Wolfram MathWorld.md",
+    "Clippings/Division Algebra -- from Wolfram MathWorld.md",
+    "Clippings/Fourier Matrix -- from Wolfram MathWorld.md",
+    "Clippings/Quadratic Reciprocity Theorem -- from Wolfram MathWorld.md",
+    "Clippings/Biquadratic Reciprocity Theorem -- from Wolfram MathWorld.md",
+    "Clippings/Fermat's 4n+1 Theorem -- from Wolfram MathWorld.md",
+    "Clippings/!Generating Function -- from Wolfram MathWorld 4.md",
+    "Clippings/!Generating Function -- from Wolfram MathWorld 3.md",
+    "Clippings/!Generating Function -- from Wolfram MathWorld 2.md",
+    "Clippings/!Generating Function -- from Wolfram MathWorld 1.md",
+    "Clippings/!Generating Function -- from Wolfram MathWorld.md",
+    "Clippings/!Abundant Number -- from Wolfram MathWorld.md",
+    "Clippings/Haar Function -- from Wolfram MathWorld.md",
+    "Definitions/Daubechies Wavelet Filter -- from Wolfram MathWorld.md",
+    "Definitions",
+    "Clippings/Fourier Series -- from Wolfram MathWorld.md",
+    "Clippings/Hypergeometric Differential Equation -- from Wolfram MathWorld.md",
+    "Clippings/Second-Order Ordinary Differential Equation -- from Wolfram MathWorld.md",
+    "vaults/lambda-axiom-vault/01-Research/learninggs.md",
+    "Clippings",
+    "vaults/lambda-axiom-vault/01-Research/Wolfram/Second-Order Ordinary Differential Equation.md",
+    "packages/domain/bin/cli.js.map",
+    "packages/domain/bin/cli.js",
+    "packages/domain/bin",
+    "packages/domain/out/main.cjs.map",
+    "packages/domain/out/main.cjs",
+    "packages/domain/out",
+    "packages/domain/src/grammars/arithmetics.langium",
+    "packages/domain/src/grammars/statemachine.langium"
   ]
 }

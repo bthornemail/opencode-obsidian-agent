@@ -1,30 +1,143 @@
 {
-    "name": "axiom-lambda-syntax-tree-workspace",
-    "description": "Base workspace package",
-    "version": "0.0.1",
-    "type": "module",
-    "private": true,
-    "packageManager": "pnpm@10.8.2",
-    "scripts": {
-        "clean": "npm run clean --workspaces",
-        "watch": "tsc -b tsconfig.build.json --watch",
-        "build": "tsc -b tsconfig.build.json && npm run build --workspaces",
-        "build:clean": "npm run clean && npm run build",
-        "langium:generate": "npm run --workspace packages/language langium:generate",
-        "langium:watch": "npm run --workspace packages/language langium:watch",
-        "test": "npm run --workspace packages/language test"
-    },
-    "devDependencies": {
-        "@types/node": "~20.17.48",
-        "shx": "~0.4.0",
-        "typescript": "~5.8.3"
-    },
-    "volta": {
-        "node": "20.19.2",
-        "npm": "10.8.2"
-    },
-    "workspaces": [
-        "packages/language",
-        "packages/cli"
+  "name": "langium-domain-dsl",
+  "displayName": "Domain DSL",
+  "version": "0.0.1",
+  "description": "A unified domain-specific language for the Opencode Obsidian Agent Environment.",
+  "homepage": "https://langium.org",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "license": "MIT",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "arithmetics",
+        "aliases": [
+          "Arithmetics",
+          "arithmetics"
+        ],
+        "extensions": [
+          ".calc"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "domain-model",
+        "aliases": [
+          "DomainModel",
+          "domain-model"
+        ],
+        "extensions": [
+          ".dmodel"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "requirements-lang",
+        "aliases": [
+          "Requirements Language",
+          "requirements-lang"
+        ],
+        "extensions": [
+          ".req"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "tests-lang",
+        "aliases": [
+          "Tests Language",
+          "tests-lang"
+        ],
+        "extensions": [
+          ".tst"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "statemachine",
+        "aliases": [
+          "Statemachine",
+          "statemachine"
+        ],
+        "extensions": [
+          ".statemachine"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "arithmetics",
+        "scopeName": "source.arithmetics",
+        "path": "./syntaxes/arithmetics.tmLanguage.json"
+      },
+      {
+        "language": "domain-model",
+        "scopeName": "source.domain-model",
+        "path": "./syntaxes/domain-model.tmLanguage.json"
+      },
+      {
+        "language": "requirements-lang",
+        "scopeName": "source.requirements-lang",
+        "path": "./syntaxes/requirements.tmLanguage.json"
+      },
+      {
+        "language": "tests-lang",
+        "scopeName": "source.tests-lang",
+        "path": "./syntaxes/tests.tmLanguage.json"
+      },
+      {
+        "language": "statemachine",
+        "scopeName": "source.statemachine",
+        "path": "./syntaxes/statemachine.tmLanguage.json"
+      }
     ]
+  },
+  "activationEvents": [
+    "onLanguage:arithmetics",
+    "onLanguage:domain-model",
+    "onLanguage:requirements-lang",
+    "onLanguage:tests-lang",
+    "onLanguage:statemachine"
+  ],
+  "files": [
+    "bin",
+    "out",
+    "src",
+    "syntaxes",
+    "language-configuration.json"
+  ],
+  "bin": {
+    "domain-cli": "./bin/cli.js"
+  },
+  "type": "module",
+  "main": "./out/extension.cjs",
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "langium:generate": "langium generate"
+  },
+  "dependencies": {
+    "chalk": "~5.4.1",
+    "commander": "~14.0.0",
+    "langium": "~4.1.0",
+    "lodash": "~4.17.21",
+    "vscode-languageclient": "~9.0.1",
+    "vscode-languageserver": "~9.0.1"
+  },
+  "devDependencies": {
+    "langium-cli": "~4.1.0",
+    "typescript": "~5.8.3",
+    "esbuild": "~0.23.0",
+    "shx": "~0.4.0",
+    "@types/node": "~20.17.48"
+  },
+  "volta": {
+    "node": "20.19.2",
+    "npm": "10.8.2"
+  }
 }

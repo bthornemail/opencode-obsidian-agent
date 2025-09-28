@@ -1,0 +1,47 @@
+{
+  "name": "axiom-lambda-syntax-tree",
+  "scopeName": "source.axiom-lambda-syntax-tree",
+  "fileTypes": [
+    "{axiom,lambda,centroid,tetrahedron,cube,octahedron,icosahedron,dodecahedron,symbol}"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "name": "keyword.control.axiom-lambda-syntax-tree",
+      "match": ""
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.axiom-lambda-syntax-tree",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.axiom-lambda-syntax-tree"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.axiom-lambda-syntax-tree"
+            }
+          }
+        },
+        {
+          "begin": "//",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.axiom-lambda-syntax-tree"
+            }
+          },
+          "end": "(?=$)",
+          "name": "comment.line.axiom-lambda-syntax-tree"
+        }
+      ]
+    }
+  }
+}

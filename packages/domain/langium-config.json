@@ -3,30 +3,30 @@
     "languages": [
         {
             "id": "arithmetics",
-            "grammar": "src/language-server/arithmetics.langium",
+            "grammar": "src/grammars/arithmetics.langium",
             "fileExtensions": [".calc"],
             "caseInsensitive": true
         },
         {
             "id": "domain-model",
-            "grammar": "src/language-server/domain-model.langium",
+            "grammar": "src/grammars/domain-model.langium",
             "fileExtensions": [".dmodel"]
         },
         {
             "id": "requirements-lang",
-            "grammar": "src/language-server/requirements.langium",
+            "grammar": "src/grammars/requirements.langium",
             "fileExtensions": [".req"]
         },
         {
             "id": "tests-lang",
-            "grammar": "src/language-server/tests.langium",
+            "grammar": "src/grammars/tests.langium",
             "fileExtensions": [".tst"]
         },
         {
             "id": "statemachine",
-            "grammar": "src/language-server/statemachine.langium",
+            "grammar": "src/grammars/statemachine.langium",
             "fileExtensions": [".statemachine"]
         }
     ],
-    "out": "src/language-server/generated"
+    "out": "src/generated"
 }
