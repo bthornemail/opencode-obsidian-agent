@@ -8,6 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "esbuild": "^0.25.10",
     "ethers": "^5.7.2",
     "glob": "^11.0.3",
     "merkle-patricia-tree": "^4.2.4",

@@ -31,13 +31,13 @@
     "@types/node": "^16.18.126",
     "@types/ws": "^8.18.1",
     "concurrently": "^7.6.0",
-    "esbuild": "0.17.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.18.2",
     "@opencode-ai/plugin": "^0.11.8",
+    "esbuild": "^0.25.10",
     "ethers": "^6.15.0",
     "merkle-patricia-tree": "^4.2.4",
     "react": "^19.1.1",
